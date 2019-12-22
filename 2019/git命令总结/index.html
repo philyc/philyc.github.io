@@ -57,7 +57,7 @@
     "datePublished": "2019-12-21 12:32:48 \x2b0800 CST",
     "dateModified" : "2019-12-21 12:32:48 \x2b0800 CST",
     "url" : "https:\/\/philyc.github.io\/2019\/git%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93\/",
-    "wordCount" : "2045",
+    "wordCount" : "2043",
     "keywords" : [  "Phi\x27s Blog"]
 }
 </script>
@@ -143,7 +143,7 @@
           
 
           <h1 id="heading">常用命令</h1>
-<h2 id="git-init"><strong>git init</strong></h2>
+<h1 id="git-init"><strong>git init</strong></h1>
 <p>进入一个项目目录,执行git init,会在本地新建一个repo,在当前文件夹下创建一个.git文件夹.</p>
 <h2 id="git-clone"><strong>git clone</strong></h2>
 <p><strong>格式</strong>：</p>
@@ -155,7 +155,7 @@
 <li>git clone [url] newname</li>
 </ul>
 <p>以指定特定的名称命名local copy.</p>
-<h2 id="git-push"><strong>git push</strong></h2>
+<h1 id="git-push"><strong>git push</strong></h1>
 <p>将新分支推送至远程仓库</p>
 <p><strong>格式</strong>：</p>
 <ul>
@@ -163,21 +163,21 @@
 </ul>
 <p>将当前分支merge到alias上的[branch]分支.如果分支已经存在,将会更新,如果不存在,将会添加这个分支.</p>
 <p>如果有多个人向同一个remote repo push代码, Git会首先在你试图push的分支上运行git log,检查它的历史中是否能看到server上的branch现在的tip,如果本地历史中不能看到server的tip,说明本地的代码不是最新的,Git会拒绝你的push,让你先fetch,merge,之后再push,这样就保证了所有人的改动都会被考虑进来.</p>
-<h2 id="-git-status-">** git status **</h2>
+<h1 id="git-status"><strong>git status</strong></h1>
 <p><strong>格式</strong>：</p>
 <ul>
 <li>git status -s</li>
 </ul>
 <p>查询repo的状态，-s的输出标记会有两列。</p>
 <p>第一列是对staging区域而言,第二列是对working目录而言.</p>
-<h2 id="git-add"><strong>git add</strong></h2>
+<h1 id="git-add"><strong>git add</strong></h1>
 <p>将修改加入暂存区(staging area)</p>
 <p><strong>格式</strong>：</p>
 <ul>
 <li>git add -A</li>
 </ul>
 <p>将所有modified和new加入暂存区</p>
-<p>##<strong>git commit</strong></p>
+<h2 id="git-commit"><strong>git commit</strong></h2>
 <p>提交已经被add进来的改动</p>
 <p><strong>格式</strong>：</p>
 <ul>
@@ -193,7 +193,7 @@
 <li>git commit &ndash;amend</li>
 </ul>
 <p>增补提交. 会使用与当前提交节点相同的父节点进行一次新的提交,旧的提交将会被取消.</p>
-<h2 id="git-diff"><strong>git diff</strong></h2>
+<h1 id="git-diff"><strong>git diff</strong></h1>
 <p>比较工作目录中当前文件和暂存区域快照之间的差异。</p>
 <p><strong>格式</strong>：</p>
 <ul>
@@ -216,7 +216,7 @@
 <li>git diff [branchA]…[branchB]</li>
 </ul>
 <p>返回两个分支各自改动</p>
-<p>##<strong>git rm</strong></p>
+<h2 id="git-rm"><strong>git rm</strong></h2>
 <p><strong>格式</strong>：</p>
 <ul>
 <li>git rm file:</li>
@@ -226,13 +226,13 @@
 <li>git rm &ndash;cached:</li>
 </ul>
 <p>从staging区移除文件,但留在工作目录中.</p>
-<p>##<strong>git clean</strong></p>
+<h2 id="git-clean"><strong>git clean</strong></h2>
 <p><strong>格式</strong>：</p>
 <ul>
 <li>git clean -df:</li>
 </ul>
 <p>从工作目录中移除没有track的文件.-d表示同时移除目录,-f表示force</p>
-<p>##<strong>git branch</strong></p>
+<h2 id="git-branch"><strong>git branch</strong></h2>
 <p>列出，创建和删除分支.</p>
 <p><strong>格式</strong>：</p>
 <ul>
@@ -251,7 +251,7 @@
 <li>git branch -d (branchname)</li>
 </ul>
 <p>删除一个分支.</p>
-<p>##<strong>git checkout</strong></p>
+<h2 id="git-checkout"><strong>git checkout</strong></h2>
 <p>切换分支</p>
 <p><strong>格式</strong>：</p>
 <ul>
@@ -262,14 +262,14 @@
 <li>git checkout -b (branchname)</li>
 </ul>
 <p>创建并切换到新的分支.</p>
-<p>##<strong>git revert</strong></p>
+<h2 id="git-revert"><strong>git revert</strong></h2>
 <p>反转撤销提交，将出错的提交(commit)的名字(reference)作为参数传给命令</p>
 <p><strong>格式</strong>：</p>
 <ul>
 <li>git revert HEAD</li>
 </ul>
 <p>撤销最近的一个提交.</p>
-<p>##<strong>git merge</strong></p>
+<h2 id="git-merge"><strong>git merge</strong></h2>
 <p>将一个分支merge进当前的分支</p>
 <p><strong>格式</strong>：</p>
 <ul>
@@ -277,7 +277,7 @@
 </ul>
 <p>把远程分支merge到当前分支.</p>
 <p>如果出现冲突,需要手动修改，可以用到git diff,解决完之后用git add添加,即表示冲突已经被resolved.</p>
-<p>##<strong>git remote</strong></p>
+<h2 id="git-remote"><strong>git remote</strong></h2>
 <p>为每一个remote repo的url都建立一个别名，用git remote来管理这个list.</p>
 <p>如果clone一个project，Git会自动将原来的url添加进来，别名就叫做origin.</p>
 <p><strong>格式</strong>：</p>
@@ -305,7 +305,7 @@
 <li>git remote set-url [alias] [url]</li>
 </ul>
 <p>更新url. 可以加上—push和fetch参数，为同一个别名set不同的存取地址.</p>
-<p>##<strong>git fetch</strong></p>
+<h2 id="git-fetch"><strong>git fetch</strong></h2>
 <p>fetch将会取到所有你本地没有的数据,所有取下来的分支可以被叫做remote branches,它们和本地分支一样(可以看diff,log等,也可以merge到其他分支),但是Git不允许你checkout到它们</p>
 <p><strong>格式</strong>：</p>
 <ul>
@@ -316,17 +316,17 @@
 <li>git fetch &ndash;all</li>
 </ul>
 <p>取到全部repo</p>
-<p>##<strong>git pull</strong></p>
+<h2 id="git-pull"><strong>git pull</strong></h2>
 <p>git pull会首先执行git fetch,然后执行git merge,把取来的分支的head merge到当前分支.这个merge操作会产生一个新的commit.</p>
 <p>pull == fetch + merge FETCH_HEAD</p>
-<p>##<strong>git tag</strong></p>
+<h2 id="git-tag"><strong>git tag</strong></h2>
 <p>在一个提交上建立永久性的书签,通常是发布一个release版本之后加tag.</p>
 <p><strong>格式</strong>：</p>
 <p>git tag -a v1.0</p>
 <p>-a参数允许你添加一些信息</p>
 <p>push的时候是不包含tag的,如果想包含,可以在push时加上&ndash;tags参数</p>
 <p>fetch的时候,branch HEAD可以reach的tags是自动被fetch下来的,如果想确保所有的tags都被包含进来,需要加上&ndash;tags选项.</p>
-<p>##<strong>git log</strong></p>
+<h2 id="git-log"><strong>git log</strong></h2>
 <p>展示log</p>
 <p><strong>格式</strong>：</p>
 <ul>
