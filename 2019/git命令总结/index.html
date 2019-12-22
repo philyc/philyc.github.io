@@ -46,7 +46,7 @@
     "articleSection" : "posts",
     "name" : "Git命令总结",
     "headline" : "Git命令总结",
-    "description" : "Git常用命令 ##git init## 进入一个项目目录,执行git init,会在本地新建一个repo,在当前文件夹下创建一个.git文件夹. ##git clone## 格式： git clone [url] 取一",
+    "description" : "常用命令 git init 进入一个项目目录,执行git init,会在本地新建一个repo,在当前文件夹下创建一个.git文件夹. git clone 格式： git clone [url] 取一个ur",
     "inLanguage" : "zh-cn",
     "author" : "Phi",
     "creator" : "Phi",
@@ -142,10 +142,10 @@
           
           
 
-          <h1 id="git">Git常用命令</h1>
-<p>##<strong>git init</strong>##</p>
+          <h1 id="heading">常用命令</h1>
+<h2 id="git-init"><strong>git init</strong></h2>
 <p>进入一个项目目录,执行git init,会在本地新建一个repo,在当前文件夹下创建一个.git文件夹.</p>
-<p>##<strong>git clone</strong>##</p>
+<h2 id="git-clone"><strong>git clone</strong></h2>
 <p><strong>格式</strong>：</p>
 <ul>
 <li>git clone [url]</li>
@@ -155,15 +155,15 @@
 <li>git clone [url] newname</li>
 </ul>
 <p>以指定特定的名称命名local copy.</p>
-<p>##<strong>git push</strong></p>
-<p>push your new branches and data to a remote repository.</p>
+<h2 id="git-push"><strong>git push</strong></h2>
+<p>将新分支推送至远程仓库</p>
 <p><strong>格式</strong>：</p>
 <ul>
 <li>git push [alias] [branch]</li>
 </ul>
 <p>将当前分支merge到alias上的[branch]分支.如果分支已经存在,将会更新,如果不存在,将会添加这个分支.</p>
 <p>如果有多个人向同一个remote repo push代码, Git会首先在你试图push的分支上运行git log,检查它的历史中是否能看到server上的branch现在的tip,如果本地历史中不能看到server的tip,说明本地的代码不是最新的,Git会拒绝你的push,让你先fetch,merge,之后再push,这样就保证了所有人的改动都会被考虑进来.</p>
-<p>##<strong>git status</strong>##</p>
+<h2 id="-git-status-">** git status **</h2>
 <p><strong>格式</strong>：</p>
 <ul>
 <li>git status -s</li>
