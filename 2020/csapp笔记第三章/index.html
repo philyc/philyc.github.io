@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Phi">
+  
+  
+  
+  <link rel="prev" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%BA%8C%E7%AB%A0/" />
+  
+  <link rel="canonical" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B8%89%E7%AB%A0/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           《CSAPP》笔记——第三章 | Phi&#39;s Blog
+       
+  </title>
+  <meta name="title" content="《CSAPP》笔记——第三章 | Phi&#39;s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/philyc.github.io\/"
+    },
+    "articleSection" : "posts",
+    "name" : "《CSAPP》笔记——第三章",
+    "headline" : "《CSAPP》笔记——第三章",
+    "description" : "CSAPP Reading notes-chapter 3.",
+    "inLanguage" : "zh-cn",
+    "author" : "Phi",
+    "creator" : "Phi",
+    "publisher": "Phi",
+    "accountablePerson" : "Phi",
+    "copyrightHolder" : "Phi",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-03-10 15:48:18 \x2b0800 CST",
+    "dateModified" : "2020-03-10 15:48:18 \x2b0800 CST",
+    "url" : "https:\/\/philyc.github.io\/2020\/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B8%89%E7%AB%A0\/",
+    "wordCount" : "858",
+    "keywords" : [ "CSAPP","Reading notes", "Phi\x27s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://philyc.github.io/">Phi&#39;s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://philyc.github.io/">Phi&#39;s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">《CSAPP》笔记——第三章</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://philyc.github.io/" rel="author">Phi</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2020-03-10 itemprop="datePublished">March 10, 2020</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://philyc.github.io/categories/book/"> Book </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <h1 id="1">1.机器代码</h1>
+<p>采用<strong>指令集体系结构</strong>或<strong>指令集架构</strong>定义机器级程序的格式和行为。</p>
+<ul>
+<li>
+<p>程序计数器 ： 给出要执行下一条指令在内存中地址</p>
+</li>
+<li>
+<p>整数寄存器 ： 存储地址或整数数据</p>
+</li>
+<li>
+<p>条件码寄存器 ： 最近执行的算术或逻辑指令的状态信息</p>
+</li>
+<li>
+<p>向量寄存器 ： 存放一个或多个整数或浮点值</p>
+</li>
+</ul>
+<h1 id="2">2.常见汇编指令</h1>
+<ol>
+<li><strong>制作数指令符</strong></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>格式</th>
+<th>操作数值</th>
+<th>名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>立即数</td>
+<td>$Imm</td>
+<td>Imm</td>
+<td>立即数寻址</td>
+</tr>
+<tr>
+<td>寄存器</td>
+<td>ra</td>
+<td>R[ra]</td>
+<td>寄存器寻址</td>
+</tr>
+<tr>
+<td>存储器</td>
+<td>Imm</td>
+<td>M[Imm]</td>
+<td>绝对寻址</td>
+</tr>
+<tr>
+<td>存储器</td>
+<td>(ra)</td>
+<td>M[R[ra]]</td>
+<td>间接寻址</td>
+</tr>
+<tr>
+<td>存储器</td>
+<td>Imm(rb)</td>
+<td>M[Imm+R[rb]]</td>
+<td>（基址+偏移量）寻址</td>
+</tr>
+<tr>
+<td>存储器</td>
+<td>(rb,ri)</td>
+<td>M[R[rb]+R[ri]]</td>
+<td>变址寻址</td>
+</tr>
+<tr>
+<td>存储器</td>
+<td>Imm(rb,ri)</td>
+<td>M[Imm+R[rb]+R[ri]]</td>
+<td>变址寻址</td>
+</tr>
+<tr>
+<td>存储器</td>
+<td>(,ri,s)</td>
+<td>M[R[ri]*s]</td>
+<td>比例变址寻址</td>
+</tr>
+<tr>
+<td>存储器</td>
+<td>Imm(,ri,s)</td>
+<td>M[Imm+R[ri]*s]</td>
+<td>比例变址寻址</td>
+</tr>
+<tr>
+<td>存储器</td>
+<td>(rb,ri,s)</td>
+<td>M[R[rb]+R[ri]*s]</td>
+<td>比例变址寻址</td>
+</tr>
+<tr>
+<td>存储器</td>
+<td>Imm(rb,ri,s)</td>
+<td>M[Imm+R[rb]+R[ri]*s]</td>
+<td>比例变址寻址</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li><strong>数据传送</strong></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>操作数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MOV</td>
+<td></td>
+<td>传送</td>
+</tr>
+<tr>
+<td>movb</td>
+<td></td>
+<td>传送字节</td>
+</tr>
+<tr>
+<td>movw</td>
+<td></td>
+<td>传送字</td>
+</tr>
+<tr>
+<td>movl</td>
+<td></td>
+<td>传送双字</td>
+</tr>
+<tr>
+<td>movq</td>
+<td></td>
+<td>传送四字</td>
+</tr>
+<tr>
+<td>movabsq</td>
+<td></td>
+<td>传送绝对四字</td>
+</tr>
+<tr>
+<td>——</td>
+<td>——</td>
+<td>——</td>
+</tr>
+<tr>
+<td>MOVZ</td>
+<td></td>
+<td>以零拓展传送</td>
+</tr>
+<tr>
+<td>——</td>
+<td>——</td>
+<td>——</td>
+</tr>
+<tr>
+<td>MOVS</td>
+<td></td>
+<td>以符号拓展传送</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li><strong>压栈和弹栈</strong></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>操作数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pushq</td>
+<td>S</td>
+<td>将四字压入栈</td>
+</tr>
+<tr>
+<td>popq</td>
+<td>D</td>
+<td>将四字弹出栈</td>
+</tr>
+</tbody>
+</table>
+<ol start="4">
+<li><strong>算术与逻辑</strong></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>操作数</th>
+<th>效果</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>leadq</td>
+<td>S,D</td>
+<td>D=&amp;S</td>
+<td>加载有效地址</td>
+</tr>
+<tr>
+<td>INC</td>
+<td>D</td>
+<td>D=D+1</td>
+<td>加1</td>
+</tr>
+<tr>
+<td>DEC</td>
+<td>D</td>
+<td>D=D-1</td>
+<td>减1</td>
+</tr>
+<tr>
+<td>NEG</td>
+<td>D</td>
+<td>D=-D</td>
+<td>取负</td>
+</tr>
+<tr>
+<td>NOT</td>
+<td>D</td>
+<td>D=-D</td>
+<td>取补</td>
+</tr>
+<tr>
+<td>ADD</td>
+<td>S,D</td>
+<td>D=D+S</td>
+<td>加</td>
+</tr>
+<tr>
+<td>SUB</td>
+<td>S,D</td>
+<td>D=D-S</td>
+<td>减</td>
+</tr>
+<tr>
+<td>IMUL</td>
+<td>S,D</td>
+<td>D=D*S</td>
+<td>乘</td>
+</tr>
+<tr>
+<td>XOR</td>
+<td>S,D</td>
+<td>D=D^S</td>
+<td>异或</td>
+</tr>
+<tr>
+<td>OR</td>
+<td>S,D</td>
+<td>D=D</td>
+<td>S</td>
+</tr>
+<tr>
+<td>AND</td>
+<td>S,D</td>
+<td>D=D&amp;S</td>
+<td>与</td>
+</tr>
+<tr>
+<td>SAL</td>
+<td>K,D</td>
+<td>D=D&laquo;K</td>
+<td>左移</td>
+</tr>
+<tr>
+<td>SHL</td>
+<td>K,D</td>
+<td>D=D&laquo;K</td>
+<td>左移</td>
+</tr>
+<tr>
+<td>SAR</td>
+<td>K,D</td>
+<td>D=D&raquo;K(A)</td>
+<td>算术右移</td>
+</tr>
+<tr>
+<td>SHR</td>
+<td>K,D</td>
+<td>D=D&raquo;K(L)</td>
+<td>逻辑右移</td>
+</tr>
+</tbody>
+</table>
+<ol start="5">
+<li><strong>控制</strong></li>
+</ol>
+<p>条件码检测属性</p>
+<ul>
+<li>CF ： 进位标志，可用来检查无符号操作溢出</li>
+<li>ZF ： 零标志</li>
+<li>SF ： 符号标志，最近操作结果为负</li>
+<li>OF ： 溢出标志，最近操作补码溢出</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>操作数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CMP</td>
+<td>S1，S2</td>
+<td>比较</td>
+</tr>
+<tr>
+<td>TEST</td>
+<td>S1，S2</td>
+<td>测试</td>
+</tr>
+<tr>
+<td>SET</td>
+<td>D</td>
+<td>根据条件码组合将一个字节设置为0或1</td>
+</tr>
+</tbody>
+</table>
+<ol start="6">
+<li><strong>跳转</strong></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>操作数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>jmp</td>
+<td>Label</td>
+<td>直接跳转</td>
+</tr>
+<tr>
+<td>jmp</td>
+<td>*operand</td>
+<td>间接跳转</td>
+</tr>
+<tr>
+<td>je</td>
+<td></td>
+<td>相等</td>
+</tr>
+<tr>
+<td>jne</td>
+<td></td>
+<td>不想等</td>
+</tr>
+<tr>
+<td>js</td>
+<td></td>
+<td>负数</td>
+</tr>
+<tr>
+<td>jns</td>
+<td></td>
+<td>非负</td>
+</tr>
+<tr>
+<td>jg</td>
+<td>有符号</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>jge</td>
+<td>有符号</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>jl</td>
+<td>有符号</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>jle</td>
+<td>有符号</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>ja</td>
+<td>无符号</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>jae</td>
+<td>无符号</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>jb</td>
+<td>无符号</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>jbe</td>
+<td>无符号</td>
+<td>小于等于</td>
+</tr>
+</tbody>
+</table>
+<h1 id="3">3.运行过程</h1>
+<ul>
+<li><strong>传递控制</strong></li>
+</ul>
+<p>压栈和入栈保证程序正确返回。</p>
+<p>![RuningStack](img/chapter3_Runing stack.png)</p>
+<ul>
+<li><strong>传递数据</strong></li>
+</ul>
+<p>有些时候局部数据需加载至栈中</p>
+<ol>
+<li>寄存器无法存放所有本地数据</li>
+<li>对一个局部变量取地址</li>
+<li>某些局部变量是数据或结构</li>
+</ol>
+<ul>
+<li><strong>分配与释放内存</strong></li>
+</ul>
+<h1 id="4">4.简单的结构</h1>
+<ol>
+<li><strong>结构</strong></li>
+</ol>
+<p>用struct声明，将多个对象集合值一个单位</p>
+<p>结构所有组成存放在一段连续区域内，指向结构指针为结构第一个字节地址，产生偏移进行引用</p>
+<ol start="2">
+<li><strong>联合</strong></li>
+</ol>
+<p>用union声明，几种不同类型引用一个对象</p>
+<p>用不同的字段引用相同的内存块</p>
+<h1 id="5">5.对抗栈溢出</h1>
+<ol>
+<li><strong>栈随机化</strong></li>
+<li><strong>栈破坏检测</strong></li>
+<li><strong>限制可执行代码区域</strong></li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Phi </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B8%89%E7%AB%A0/>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B8%89%E7%AB%A0/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://philyc.github.io/tags/csapp/">
+                    #CSAPP</a></span>
+            
+            <span class="tag"><a href="https://philyc.github.io/tags/reading-notes/">
+                    #Reading notes</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://philyc.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%BA%8C%E7%AB%A0/" class="prev" rel="prev" title="《CSAPP》笔记——第二章"><i class="iconfont icon-left"></i>&nbsp;《CSAPP》笔记——第二章</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://philyc.github.io/">Phi</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

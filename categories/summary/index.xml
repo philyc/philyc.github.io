@@ -17,7 +17,7 @@
       <pubDate>Tue, 03 Mar 2020 18:27:27 +0800</pubDate>
       
       <guid>https://philyc.github.io/2020/linux%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</guid>
-      <description>常用指令 查看目录 ls -a 显示指定目录下所有子目录与文件，包括隐藏文件 -l 以列表方式显示文件的详细信息 -h 配合-l以人性化方式显示文件大小 ls通配符 *</description>
+      <description>查看目录 ls -a 显示指定目录下所有子目录与文件，包括隐藏文件 -l 以列表方式显示文件的详细信息 -h 配合-l以人性化方式显示文件大小 ls通配符 *代表任意</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Sat, 21 Dec 2019 12:32:48 +0800</pubDate>
       
       <guid>https://philyc.github.io/2019/git%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</guid>
-      <description>常用命令 git init 进入一个项目目录,执行git init,会在本地新建一个repo,在当前文件夹下创建一个.git文件夹。 git clone 格式： git clone [url] 取一个ur</description>
+      <description>git init 进入一个项目目录,执行git init,会在本地新建一个repo,在当前文件夹下创建一个.git文件夹。 git clone 格式： git clone [url] 取一个url对应的</description>
     </item>
     
   </channel>
