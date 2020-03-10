@@ -6,9 +6,46 @@
     <description>Recent content in Tags on Phi&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
+    <lastBuildDate>Tue, 10 Mar 2020 12:31:32 +0800</lastBuildDate>
     
 	<atom:link href="https://philyc.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CSAPP</title>
+      <link>https://philyc.github.io/tags/csapp/</link>
+      <pubDate>Tue, 10 Mar 2020 12:31:32 +0800</pubDate>
+      
+      <guid>https://philyc.github.io/tags/csapp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reading notes</title>
+      <link>https://philyc.github.io/tags/reading-notes/</link>
+      <pubDate>Tue, 10 Mar 2020 12:31:32 +0800</pubDate>
+      
+      <guid>https://philyc.github.io/tags/reading-notes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://philyc.github.io/tags/linux/</link>
+      <pubDate>Tue, 03 Mar 2020 18:27:27 +0800</pubDate>
+      
+      <guid>https://philyc.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>https://philyc.github.io/tags/git/</link>
+      <pubDate>Sat, 21 Dec 2019 12:32:48 +0800</pubDate>
+      
+      <guid>https://philyc.github.io/tags/git/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>
