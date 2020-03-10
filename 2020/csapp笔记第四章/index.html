@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Phi">
+  
+  
+  
+  <link rel="prev" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B8%89%E7%AB%A0/" />
+  
+  <link rel="canonical" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           《CSAPP》笔记——第四章 | Phi&#39;s Blog
+       
+  </title>
+  <meta name="title" content="《CSAPP》笔记——第四章 | Phi&#39;s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/philyc.github.io\/"
+    },
+    "articleSection" : "posts",
+    "name" : "《CSAPP》笔记——第四章",
+    "headline" : "《CSAPP》笔记——第四章",
+    "description" : "CSAPP Reading notes-chapter 4.",
+    "inLanguage" : "zh-cn",
+    "author" : "Phi",
+    "creator" : "Phi",
+    "publisher": "Phi",
+    "accountablePerson" : "Phi",
+    "copyrightHolder" : "Phi",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-03-10 18:34:07 \x2b0800 CST",
+    "dateModified" : "2020-03-10 18:34:07 \x2b0800 CST",
+    "url" : "https:\/\/philyc.github.io\/2020\/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0\/",
+    "wordCount" : "654",
+    "keywords" : [ "CSAPP","Reading notes", "Phi\x27s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://philyc.github.io/">Phi&#39;s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://philyc.github.io/">Phi&#39;s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">《CSAPP》笔记——第四章</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://philyc.github.io/" rel="author">Phi</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2020-03-10 itemprop="datePublished">March 10, 2020</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://philyc.github.io/categories/book/"> Book </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <h1 id="1">1.指令集体系</h1>
+<ul>
+<li>内存：概念上来说是一个很大的字节数组，保存程序和数据</li>
+<li>虚拟内存：引用内存位置，硬件和操作系统软件联合将虚拟地址翻译成实际或物理地址</li>
+<li>程序码：指示程序执行的总体状态</li>
+<li>指令集：每一个不同类型的指令都有着不一样的起始字节，根据类型的不同编码的长度和格式也不一样，表达不同的含义，每个字节编码必须有唯一的解释</li>
+</ul>
+<h1 id="2">2.指令顺序实现</h1>
+<p>指令实现阶段：取值、译码、执行、访存、写回、更新</p>
+<ul>
+<li><strong>取值</strong>：从内容中读取指令字节，地址为程序计数器的值</li>
+<li><strong>译码</strong>：从寄存器文件中读入最多两个操作数</li>
+<li><strong>执行</strong>：算术/逻辑达摩院执行指令操作，计算内容引用有效地址；增加或减少栈指针</li>
+</ul>
+<p>检验条件码和传送条件，条件成立则更新目标寄存器，决定分支</p>
+<ul>
+<li><strong>访存</strong>：数据写入内存，内存读出数据</li>
+<li><strong>写回</strong>：最多将两个结果写回到寄存器文件</li>
+<li><strong>更新</strong>：将PC设置为下一条指令地址</li>
+</ul>
+<p>！<a href="/img/chapter4_HardwareWork.png">HardwareWork</a></p>
+<h1 id="3">3.流水线原理</h1>
+<p>单独的处理每一个指令周期效率很低，所以需要以流水线的方式来进行设计。流水线的每一部分可以处理一个阶段的操作，这样可以同时运行多条指令。</p>
+<p><strong>作用</strong></p>
+<p>会导致延迟加大，但吞吐量大大提升</p>
+<p><strong>局限性</strong></p>
+<ol>
+<li>各单元阶段划分不一致</li>
+<li>流水线阶段划分过多降低性能</li>
+</ol>
+<p><strong>分支预测</strong></p>
+<p>利用分支预测提前预测选择分支，加速运行</p>
+<p><strong>流水线冒险</strong></p>
+<p>相邻指令之间存在相关时会出现问题，分为数据冒险与控制冒险</p>
+<ul>
+<li><strong>数据冒险：</strong> 下一条指令会用到这一条指令计算结果</li>
+</ul>
+<ol>
+<li>用暂停避免数据冒险：直到指令计算结果写回再进行下一条指令</li>
+<li>用转发避免数据冒险：把指令结果直接从一个流水线阶段传到较早阶段</li>
+<li>加载/使用数据冒险：暂停+转发</li>
+</ol>
+<ul>
+<li><strong>控制冒险：</strong> 一条指令需确定下一条指令位置</li>
+</ul>
+<ol>
+<li>取消预测错误指令</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Phi </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0/>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://philyc.github.io/tags/csapp/">
+                    #CSAPP</a></span>
+            
+            <span class="tag"><a href="https://philyc.github.io/tags/reading-notes/">
+                    #Reading notes</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://philyc.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B8%89%E7%AB%A0/" class="prev" rel="prev" title="《CSAPP》笔记——第三章"><i class="iconfont icon-left"></i>&nbsp;《CSAPP》笔记——第三章</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://philyc.github.io/">Phi</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

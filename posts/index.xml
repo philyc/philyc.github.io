@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Phi&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 10 Mar 2020 15:48:18 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 10 Mar 2020 18:34:07 +0800</lastBuildDate>
     
 	<atom:link href="https://philyc.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>《CSAPP》笔记——第四章</title>
+      <link>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0/</link>
+      <pubDate>Tue, 10 Mar 2020 18:34:07 +0800</pubDate>
+      
+      <guid>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0/</guid>
+      <description>1.指令集体系 内存：概念上来说是一个很大的字节数组，保存程序和数据 虚拟内存：引用内存位置，硬件和操作系统软件联合将虚拟地址翻译成实际或物理地</description>
+    </item>
     
     <item>
       <title>《CSAPP》笔记——第三章</title>
