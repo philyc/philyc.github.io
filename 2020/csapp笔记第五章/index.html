@@ -9,9 +9,9 @@
   
   
   
-  <link rel="prev" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B8%89%E7%AB%A0/" />
-  <link rel="next" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%BA%94%E7%AB%A0/" />
-  <link rel="canonical" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0/" />
+  <link rel="prev" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0/" />
+  
+  <link rel="canonical" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%BA%94%E7%AB%A0/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           《CSAPP》笔记——第四章 | Phi&#39;s Blog
+           《CSAPP》笔记——第五章 | Phi&#39;s Blog
        
   </title>
-  <meta name="title" content="《CSAPP》笔记——第四章 | Phi&#39;s Blog">
+  <meta name="title" content="《CSAPP》笔记——第五章 | Phi&#39;s Blog">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,9 +44,9 @@
          "@id": "https:\/\/philyc.github.io\/"
     },
     "articleSection" : "posts",
-    "name" : "《CSAPP》笔记——第四章",
-    "headline" : "《CSAPP》笔记——第四章",
-    "description" : "CSAPP Reading notes-chapter 4.",
+    "name" : "《CSAPP》笔记——第五章",
+    "headline" : "《CSAPP》笔记——第五章",
+    "description" : "CSAPP Reading notes-chapter 5.",
     "inLanguage" : "zh-cn",
     "author" : "Phi",
     "creator" : "Phi",
@@ -54,10 +54,10 @@
     "accountablePerson" : "Phi",
     "copyrightHolder" : "Phi",
     "copyrightYear" : "2020",
-    "datePublished": "2020-03-10 18:34:07 \x2b0800 CST",
-    "dateModified" : "2020-03-10 18:34:07 \x2b0800 CST",
-    "url" : "https:\/\/philyc.github.io\/2020\/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0\/",
-    "wordCount" : "654",
+    "datePublished": "2020-03-10 23:46:53 \x2b0800 CST",
+    "dateModified" : "2020-03-10 23:46:53 \x2b0800 CST",
+    "url" : "https:\/\/philyc.github.io\/2020\/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%BA%94%E7%AB%A0\/",
+    "wordCount" : "177",
     "keywords" : [ "CSAPP","Reading notes", "Phi\x27s Blog"]
 }
 </script>
@@ -116,7 +116,7 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">《CSAPP》笔记——第四章</h1>
+        <h1 class="post-title" itemprop="name headline">《CSAPP》笔记——第五章</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://philyc.github.io/" rel="author">Phi</a> with ♥ 
                 <span class="post-time">
@@ -146,53 +146,23 @@
           
           
 
-          <h1 id="1">1.指令集体系</h1>
-<ul>
-<li>内存：概念上来说是一个很大的字节数组，保存程序和数据</li>
-<li>虚拟内存：引用内存位置，硬件和操作系统软件联合将虚拟地址翻译成实际或物理地址</li>
-<li>程序码：指示程序执行的总体状态</li>
-<li>指令集：每一个不同类型的指令都有着不一样的起始字节，根据类型的不同编码的长度和格式也不一样，表达不同的含义，每个字节编码必须有唯一的解释</li>
-</ul>
-<h1 id="2">2.指令顺序实现</h1>
-<p>指令实现阶段：取值、译码、执行、访存、写回、更新</p>
-<ul>
-<li><strong>取值</strong>：从内容中读取指令字节，地址为程序计数器的值</li>
-<li><strong>译码</strong>：从寄存器文件中读入最多两个操作数</li>
-<li><strong>执行</strong>：算术/逻辑达摩院执行指令操作，计算内容引用有效地址；增加或减少栈指针</li>
-</ul>
-<p>检验条件码和传送条件，条件成立则更新目标寄存器，决定分支</p>
-<ul>
-<li><strong>访存</strong>：数据写入内存，内存读出数据</li>
-<li><strong>写回</strong>：最多将两个结果写回到寄存器文件</li>
-<li><strong>更新</strong>：将PC设置为下一条指令地址</li>
-</ul>
-<p>！<a href="/img/chapter4_HardwareWork.png">HardwareWork</a></p>
-<h1 id="3">3.流水线原理</h1>
-<p>单独的处理每一个指令周期效率很低，所以需要以流水线的方式来进行设计。流水线的每一部分可以处理一个阶段的操作，这样可以同时运行多条指令。</p>
-<p><strong>作用</strong></p>
-<p>会导致延迟加大，但吞吐量大大提升</p>
-<p><strong>局限性</strong></p>
+          <p><strong>第一层次的优化是设计好数据结构和算法，其次才是编码技巧</strong></p>
+<h1 id="1">1.优化缺陷</h1>
+<p>某些情况下编译器会放弃对代码的优化</p>
 <ol>
-<li>各单元阶段划分不一致</li>
-<li>流水线阶段划分过多降低性能</li>
+<li><strong>内存别名使用无法优化:</strong> 编译器无法确定程序内的指针是否指向同一位置</li>
+<li><strong>函数调用无法优化:</strong> 编译器优化会修改函数调用次数时，编译器会非常小心处理这种情况(可采用内联函数)</li>
 </ol>
-<p><strong>分支预测</strong></p>
-<p>利用分支预测提前预测选择分支，加速运行</p>
-<p><strong>流水线冒险</strong></p>
-<p>相邻指令之间存在相关时会出现问题，分为数据冒险与控制冒险</p>
-<ul>
-<li><strong>数据冒险：</strong> 下一条指令会用到这一条指令计算结果</li>
-</ul>
+<h1 id="2">2.程序级优化</h1>
 <ol>
-<li>用暂停避免数据冒险：直到指令计算结果写回再进行下一条指令</li>
-<li>用转发避免数据冒险：把指令结果直接从一个流水线阶段传到较早阶段</li>
-<li>加载/使用数据冒险：暂停+转发</li>
+<li>消除低效率的循环</li>
+<li>减少调用过程</li>
+<li>消除不必要的内存引用</li>
 </ol>
-<ul>
-<li><strong>控制冒险：</strong> 一条指令需确定下一条指令位置</li>
-</ul>
+<h1 id="3">3.机器级优化</h1>
 <ol>
-<li>取消预测错误指令</li>
+<li>循环展开</li>
+<li>提高并行性</li>
 </ol>
 
     </div>
@@ -208,7 +178,7 @@
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0/>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0/</span>
+                    <a href=https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%BA%94%E7%AB%A0/>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%BA%94%E7%AB%A0/</span>
             </p>
             
              
@@ -240,10 +210,8 @@
 
     <div class="post-nav">
         
-        <a href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B8%89%E7%AB%A0/" class="prev" rel="prev" title="《CSAPP》笔记——第三章"><i class="iconfont icon-left"></i>&nbsp;《CSAPP》笔记——第三章</a>
+        <a href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0/" class="prev" rel="prev" title="《CSAPP》笔记——第四章"><i class="iconfont icon-left"></i>&nbsp;《CSAPP》笔记——第四章</a>
          
-        
-        <a href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%BA%94%E7%AB%A0/" class="next" rel="next" title="《CSAPP》笔记——第五章">《CSAPP》笔记——第五章&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 
