@@ -9,9 +9,9 @@
   
   
   
-  <link rel="prev" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0/" />
-  <link rel="next" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%85%AD%E7%AB%A0/" />
-  <link rel="canonical" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%BA%94%E7%AB%A0/" />
+  <link rel="prev" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%BA%94%E7%AB%A0/" />
+  
+  <link rel="canonical" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%85%AD%E7%AB%A0/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           《CSAPP》笔记——第五章 | Phi&#39;s Blog
+           《CSAPP》笔记——第六章 | Phi&#39;s Blog
        
   </title>
-  <meta name="title" content="《CSAPP》笔记——第五章 | Phi&#39;s Blog">
+  <meta name="title" content="《CSAPP》笔记——第六章 | Phi&#39;s Blog">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,9 +44,9 @@
          "@id": "https:\/\/philyc.github.io\/"
     },
     "articleSection" : "posts",
-    "name" : "《CSAPP》笔记——第五章",
-    "headline" : "《CSAPP》笔记——第五章",
-    "description" : "CSAPP Reading notes-chapter 5.",
+    "name" : "《CSAPP》笔记——第六章",
+    "headline" : "《CSAPP》笔记——第六章",
+    "description" : "CSAPP Reading notes-chapter 6.",
     "inLanguage" : "zh-cn",
     "author" : "Phi",
     "creator" : "Phi",
@@ -54,10 +54,10 @@
     "accountablePerson" : "Phi",
     "copyrightHolder" : "Phi",
     "copyrightYear" : "2020",
-    "datePublished": "2020-03-10 23:46:53 \x2b0800 CST",
-    "dateModified" : "2020-03-10 23:46:53 \x2b0800 CST",
-    "url" : "https:\/\/philyc.github.io\/2020\/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%BA%94%E7%AB%A0\/",
-    "wordCount" : "177",
+    "datePublished": "2020-03-11 10:35:11 \x2b0800 CST",
+    "dateModified" : "2020-03-11 10:35:11 \x2b0800 CST",
+    "url" : "https:\/\/philyc.github.io\/2020\/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%85%AD%E7%AB%A0\/",
+    "wordCount" : "682",
     "keywords" : [ "CSAPP","Reading notes", "Phi\x27s Blog"]
 }
 </script>
@@ -116,11 +116,11 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">《CSAPP》笔记——第五章</h1>
+        <h1 class="post-title" itemprop="name headline">《CSAPP》笔记——第六章</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://philyc.github.io/" rel="author">Phi</a> with ♥ 
                 <span class="post-time">
-                on <time datetime=2020-03-10 itemprop="datePublished">March 10, 2020</time>
+                on <time datetime=2020-03-11 itemprop="datePublished">March 11, 2020</time>
                 </span>
                 in
                 <i class="iconfont icon-folder"></i>
@@ -146,24 +146,51 @@
           
           
 
-          <p><strong>第一层次的优化是设计好数据结构和算法，其次才是编码技巧</strong></p>
-<h1 id="1">1.优化缺陷</h1>
-<p>某些情况下编译器会放弃对代码的优化</p>
+          <h1 id="1">1.存储器结构</h1>
+<p>层次结构是基于<strong>局部性</strong>原理而构建的, 即程序相邻的代码访问的数据和指令是距离很近的, 这样层次结构才能发挥它的效果, 否则程序就会运行的很慢</p>
+<p>寄存器 &gt; L1 Cache &gt; L2 Cache &gt; L3 Cache &gt; 内存 &gt; 硬盘 &gt; 网络</p>
+<p>CPU读写内存需要总线的传输</p>
+<p>CPU -&gt; 系统总线 -&gt; I/O桥 -&gt; 内存总线 -&gt; 内存.</p>
+<h1 id="2">2.存储技术</h1>
+<ul>
+<li><strong>RAM</strong>(Random-Access Memory)分为SRAM和DRAM</li>
+</ul>
 <ol>
-<li><strong>内存别名使用无法优化:</strong> 编译器无法确定程序内的指针是否指向同一位置</li>
-<li><strong>函数调用无法优化:</strong> 编译器优化会修改函数调用次数时，编译器会非常小心处理这种情况(可采用内联函数)</li>
+<li>SRAM不需要频繁的刷新保持数据</li>
+<li>DRAM需要频繁的刷新才能保持数据, 但是一旦断电, 都会丢失数据</li>
 </ol>
-<h1 id="2">2.程序级优化</h1>
+<ul>
+<li><strong>磁盘</strong>为非易失类型存储</li>
+</ul>
 <ol>
-<li>消除低效率的循环</li>
-<li>减少调用过程</li>
-<li>消除不必要的内存引用</li>
+<li>ROM只读存储器</li>
+<li>PROM只能被编程一次</li>
+<li>EPROM需要光线进行擦除, 可编程1000次</li>
+<li>EEPROM可以直接在印制电路卡上编程, 可编程10^5次，闪存</li>
 </ol>
-<h1 id="3">3.机器级优化</h1>
+<ul>
+<li><strong>I/O设备</strong>连接需要I/O总线</li>
+</ul>
 <ol>
-<li>循环展开</li>
-<li>提高并行性</li>
+<li>USB通用串行总线</li>
+<li>显卡</li>
+<li>主机总线适配器, 用于连接磁盘，如SATA</li>
+<li>其他设备, 如网卡</li>
 </ol>
+<h1 id="3cpu">3.CPU读取磁盘过程</h1>
+<ol>
+<li>CPU发送第一条指令, 告诉磁盘发起一个读, 同时还发送了其他的参数, 例如当读完成, 是否中断CPU</li>
+<li>CPU第二条指令指明要读的逻辑块号</li>
+<li>CPU第三条指令指名存储的主存地址</li>
+<li>CPU发送完指令后就去做别的事情, 磁盘控制器收到CPU指令后, 将逻辑块号翻译成一个扇区地址, 然后将内容直接传送到主存DMA。</li>
+<li>传送完成后, 磁盘控制器给CPU发送一个中断信号。这会导致CPU暂停工作, 跳转到一个操作系统例程, 这个例程会记录I/O操作已完成, 然后将控制返回到CPU被中断的地方</li>
+</ol>
+<h1 id="4">4.局部性</h1>
+<ul>
+<li><strong>时间局部性:</strong> 被引用过一次的内存位置可能在不远的将来再被多次引用.</li>
+<li><strong>空间局部性:</strong> 如果一个内存位置被引用了一次, 那么程序很可能在不远的将来引用附件的一个内存位置.</li>
+</ul>
+<p>循环时, 以步长为1的方式引用内存地址, 空间局部性是最好的.</p>
 
     </div>
 
@@ -178,7 +205,7 @@
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%BA%94%E7%AB%A0/>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%BA%94%E7%AB%A0/</span>
+                    <a href=https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%85%AD%E7%AB%A0/>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%85%AD%E7%AB%A0/</span>
             </p>
             
              
@@ -210,10 +237,8 @@
 
     <div class="post-nav">
         
-        <a href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0/" class="prev" rel="prev" title="《CSAPP》笔记——第四章"><i class="iconfont icon-left"></i>&nbsp;《CSAPP》笔记——第四章</a>
+        <a href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%BA%94%E7%AB%A0/" class="prev" rel="prev" title="《CSAPP》笔记——第五章"><i class="iconfont icon-left"></i>&nbsp;《CSAPP》笔记——第五章</a>
          
-        
-        <a href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%85%AD%E7%AB%A0/" class="next" rel="next" title="《CSAPP》笔记——第六章">《CSAPP》笔记——第六章&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 
