@@ -6,10 +6,19 @@
     <description>Recent content in Book on Phi&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 11 Mar 2020 10:35:11 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 11 Mar 2020 11:48:12 +0800</lastBuildDate>
     
 	<atom:link href="https://philyc.github.io/categories/book/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>《CSAPP》笔记——第七章</title>
+      <link>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B8%83%E7%AB%A0/</link>
+      <pubDate>Wed, 11 Mar 2020 11:48:12 +0800</pubDate>
+      
+      <guid>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B8%83%E7%AB%A0/</guid>
+      <description>1.链接 链接 是将各种代码和数据片段收集并组合成为一个单一文件的过程 可执行于编译时，即在源代码翻译成机器代码 可执行于加载时，即程序被加载器加载</description>
+    </item>
     
     <item>
       <title>《CSAPP》笔记——第六章</title>
