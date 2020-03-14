@@ -6,10 +6,19 @@
     <description>Recent content in Book on Phi&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 11 Mar 2020 11:48:12 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 14 Mar 2020 13:54:26 +0800</lastBuildDate>
     
 	<atom:link href="https://philyc.github.io/categories/book/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>《CSAPP》笔记——第八章</title>
+      <link>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%85%AB%E7%AB%A0/</link>
+      <pubDate>Sat, 14 Mar 2020 13:54:26 +0800</pubDate>
+      
+      <guid>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%85%AB%E7%AB%A0/</guid>
+      <description>1.控制流与异常 系统必须能对系统状态的变化做出反应，这些系统状态不是被内部程序变量捕获，也不一定和程序的执行相关 现代系统通过使 控制流 发生突变</description>
+    </item>
     
     <item>
       <title>《CSAPP》笔记——第七章</title>
