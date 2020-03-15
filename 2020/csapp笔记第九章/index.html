@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Phi">
+  
+  
+  
+  <link rel="prev" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%85%AB%E7%AB%A0/" />
+  
+  <link rel="canonical" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B9%9D%E7%AB%A0/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           《CSAPP》笔记——第九章 | Phi&#39;s Blog
+       
+  </title>
+  <meta name="title" content="《CSAPP》笔记——第九章 | Phi&#39;s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/philyc.github.io\/"
+    },
+    "articleSection" : "posts",
+    "name" : "《CSAPP》笔记——第九章",
+    "headline" : "《CSAPP》笔记——第九章",
+    "description" : "CSAPP Reading notes-chapter 9.",
+    "inLanguage" : "zh-cn",
+    "author" : "Phi",
+    "creator" : "Phi",
+    "publisher": "Phi",
+    "accountablePerson" : "Phi",
+    "copyrightHolder" : "Phi",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-03-14 20:44:05 \x2b0800 CST",
+    "dateModified" : "2020-03-14 20:44:05 \x2b0800 CST",
+    "url" : "https:\/\/philyc.github.io\/2020\/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B9%9D%E7%AB%A0\/",
+    "wordCount" : "3593",
+    "keywords" : [ "CSAPP","Reading notes", "Phi\x27s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://philyc.github.io/">Phi&#39;s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://philyc.github.io/">Phi&#39;s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">《CSAPP》笔记——第九章</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://philyc.github.io/" rel="author">Phi</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2020-03-14 itemprop="datePublished">March 14, 2020</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://philyc.github.io/categories/book/"> Book </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <h1 id="1">1.虚拟内存</h1>
+<p><strong>虚拟内存：</strong> 现代系统提供对主存的抽象概念。虚拟内存是计算机系统内存管理的一种技术，它使得应用程序认为它拥有连续的可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换</p>
+<ul>
+<li>为每个进程提供一个大的，一致的和 私有的地址空间</li>
+</ul>
+<ol>
+<li>将主存看成磁盘地址空间的高速缓存</li>
+<li>保护了每个进程的地址空间不被其他进程破坏</li>
+<li>为每个进程提供一致的地址空间，简化存储器管理</li>
+</ol>
+<ul>
+<li><strong>物理地址:</strong> 计算机系统的主存被组织为M个连续的字节大小的单元组成的数组，每个字节的地址叫物理地址.</li>
+</ul>
+<ol>
+<li>CPU访问存储器的最自然的方式使用物理地址，这种方式称为物理寻址。</li>
+</ol>
+<ul>
+<li>
+<p>现代处理器使用的是<strong>虚拟寻址</strong>的寻址形式</p>
+</li>
+<li>
+<p>CPU通过生成一个虚拟地址来访问主存，将虚拟地址转换为物理地址叫做<strong>地址翻译</strong> ，地址翻译需要CPU硬件和操作系统之间的紧密结合</p>
+</li>
+</ul>
+<ol>
+<li>CPU芯片上有叫做<strong>存储器管理单元</strong>的专用硬件。</li>
+<li>利用存储在主存中的<strong>查询表</strong>来动态翻译虚拟地址。</li>
+<li><strong>查询表</strong>由操作系统管理。</li>
+</ol>
+<ul>
+<li><strong>地址空间</strong>是一个非负整数地址的有序集合，它区分了数据对象(字节)和它们的属性(地址)</li>
+</ul>
+<ol>
+<li>N=2^n个地址的虚拟地址空间叫做n位地址空间</li>
+<li>如今操作系统支持32位或64位</li>
+</ol>
+<ul>
+<li>一个系统还有<strong>物理地址空间</strong>,它与系统中物理存储器的M=2^m(假设为2的幂)个字节相对应，一般来说</li>
+</ul>
+<ol>
+<li>字节有一个在虚拟地址空间的虚拟地址</li>
+<li>还有一个在物理地址空间的 物理地址</li>
+<li>两个地址都能访问到这个字节</li>
+</ol>
+<ul>
+<li><strong>虚拟内存</strong>被组织为一个存放在<strong>磁盘</strong>上的N个连续字节大小的单元组成的数组，每个字节都有一个唯一的虚拟地址，这个虚拟地址作为到数组的索引，磁盘上数组的内容被缓存到主存中（在某些情况下）</li>
+</ul>
+<h1 id="2">2.虚拟页</h1>
+<ul>
+<li><strong>虚拟页：</strong> 磁盘上的数据被分割称块，这些块是磁盘和主存之间的传输单元，每个虚拟页大小为P=2^p字节。任何时候，虚拟页的集合都被分为3个不相交的子集</li>
+</ul>
+<ol>
+<li>未分配的:VM系统还未分配(或者创建)的页。未分配的块没有任何数据与之相关联，不占用磁盘空间，通过malloc来分配</li>
+<li>缓存的：当前缓存在物理存储器的已分配页</li>
+<li>未缓存的:没有缓存在物理页面存储器中的已分配页</li>
+</ol>
+<ul>
+<li>
+<p><strong>物理内存</strong>被分割为物理页，大小也为P字节，被称为页帧</p>
+</li>
+<li>
+<p>DRAM表示虚拟存储器系统的缓存，在主存中缓存虚拟页，有两个特点。</p>
+</li>
+</ul>
+<ol>
+<li>DRAM缓存不命中处罚十分严重，因为磁盘比DRAM慢100000多倍。</li>
+<li>访问一字节开销大，因为从一个磁盘的一个扇区读取第一个字节的时间开销要比从该扇区中读连续的字节慢大约100000倍</li>
+</ol>
+<ul>
+<li>DRAM缓存的组织结构特点</li>
+</ul>
+<ol>
+<li>虚拟页往往很大</li>
+<li>DRAM缓存是全相联，即任何虚拟页都能放在任何物理页中</li>
+<li>精密的替换算法</li>
+<li>DRAM缓存总是写回</li>
+</ol>
+<h1 id="3">3.页表</h1>
+<ul>
+<li>判断命中和替换又多种软硬件联合提供，包括<strong>操作系统软件</strong>，MMU中的<strong>地址翻译硬件</strong>和<strong>页表</strong></li>
+</ul>
+<ol>
+<li>页表是存放在<strong>物理存储器</strong>的数据结构，页表<strong>将虚拟页映射到物理页</strong></li>
+<li>地址翻译硬件将<strong>虚拟地址转换为物理地址</strong>都会读取页表</li>
+<li>操作系统负责<strong>维护页表的内容</strong>，以及磁盘及DRAM之间来回<strong>传送页</strong></li>
+</ol>
+<ul>
+<li>页表就是一个页表条目(PTE)的数组，每个PTE有一个有效位和n位地址字段，<strong>虚拟地址空间</strong> 中每个页 在页表的固定偏移量处都有一个PTE</li>
+</ul>
+<ol>
+<li>有效位表明<strong>虚拟页是否被缓存</strong>，如果有效位存在，那么地址字段指向对应的物理存储器。</li>
+<li>如果有效位不存在，<strong>地址字段要么为NULL</strong>，要么<strong>指向虚拟页在磁盘所在的位置</strong></li>
+</ol>
+<p><img src="https://github.com/philyc/philyc.github.io/blob/master/img/chapter9_PageTable.png" alt="PageTable"></p>
+<ul>
+<li><strong>页命中：</strong> 一个虚拟地址转换为物理地址的过程</li>
+<li><strong>缺页：</strong> DRAM缓存不命中，处理如下</li>
+</ul>
+<ol>
+<li>读取虚拟地址所指向的PT</li>
+<li>读取PTE有效位，发现未被缓存，触发缺页异常</li>
+<li>调用<strong>缺页异常处理程序</strong></li>
+<li>中断结束，重新执行最开始的指令</li>
+<li>在DRAM中读取成功</li>
+</ol>
+<ul>
+<li><strong>缺页异常处理程序</strong></li>
+</ul>
+<ol>
+<li>选择牺牲页</li>
+<li>如果牺牲页发生了改变，将其拷贝回磁盘(因为是写回)</li>
+<li>需要读取的页代替了牺牲页的位置</li>
+<li>结果：牺牲页不被缓存，需要读取的页被缓存</li>
+</ol>
+<ul>
+<li>操作系统<strong>为每个进程提供一个独立的页表</strong>，虚拟内存简化了链接、加载、共享以及应用程序的存储器分配</li>
+</ul>
+<p>（1）简化链接</p>
+<ol>
+<li>独立的空间地址意味着每个进程的存储器映像使用相同的格式</li>
+<li>文本节总是从0x08048000(32位)处或0x400000(64位)处开始，然后是数据，bss节，栈</li>
+<li>一致性极大简化了链接器的设计和实现</li>
+</ol>
+<p>（2）简化加载</p>
+<ol>
+<li>加载器可以从不实际拷贝任何数据从磁盘到存储器</li>
+<li>基本都是虚拟存储系统完成</li>
+</ol>
+<p>(3) 简化共享</p>
+<ol>
+<li>独立地址空间为操作系统提供了一个管理用户进程和操作系统自身之间的一致共享机制，例如操作相同的操作系统内核代码，C标准库的printf</li>
+<li>操作系统需要将不同进程的适当的虚拟页映射到相同的物理页面</li>
+<li>多个进程共享这部分代码的一个拷贝，而不是每个进程都要加载单独的内核和C标准库的拷贝</li>
+</ol>
+<p>（4）简化存储器分配.</p>
+<ol>
+<li>虚拟页连续(虚拟页还是单独的)</li>
+<li>物理页可以不连续，使得分配更加容易</li>
+</ol>
+<ul>
+<li><strong>虚拟内存保护存储器</strong></li>
+</ul>
+<ol>
+<li>在页表条目上添加一些格外的许可位来控制访问</li>
+<li>如果指令违反了许可条件，触发一般保护性异常，然后交给异常处理程序，一般会报告为段错误</li>
+</ol>
+<h1 id="4">4.地址翻译</h1>
+<ul>
+<li><strong>地址翻译的硬件实现</strong></li>
+</ul>
+<ol>
+<li>页表基址寄存器(PTBR)指向当前页表</li>
+<li>n位的虚拟地址包含两个部分</li>
+</ol>
+<p>    （1） 一个p位的虚拟页面偏移(VPO)</p>
+<p>    （2）一个n-p位的虚拟页号(VPN)</p>
+<ol start="3">
+<li>MMU利用VPN选取适当的页面条目（PTE)</li>
+<li>页面条目 (PTE)中物理页号(PPN)和虚拟地址中的VPO串联起来，即是物理地址</li>
+</ol>
+<ul>
+<li><strong>利用TLB加速</strong></li>
+</ul>
+<ol>
+<li>在MMU中包含了一个关于PTE的小缓存，称为<strong>翻译后备缓冲器</strong>(TLB)</li>
+<li>TLB是一个小的，虚拟寻址的缓存</li>
+<li>每一行都保存着一个由单个PTE组成的块</li>
+<li>TLB通常用于高度的相连性</li>
+</ol>
+<ul>
+<li><strong>多级页表</strong></li>
+</ul>
+<p><img src="https://github.com/philyc/philyc.github.io/blob/master/img/chapter9_MultiPageTable.png" alt="MultiPageTable"></p>
+<p><strong>多级页表</strong>用于解决在很少使用时有一个很大的页表常驻于内存，从两个方面减少了存储器要求</p>
+<ol>
+<li>如果一级页表PTE为空，那么相应的二级页表就根本不会存在—————一种巨大的潜在节约，大部分时候内存都是未分配的</li>
+<li>只有一级页表才需要总是在主存中————虚拟存储器系统可以在需要时创建，页面调入，调出二级页面，减少主存压力</li>
+</ol>
+<h1 id="5">5.虚拟内存结构</h1>
+<p><img src="https://github.com/philyc/philyc.github.io/blob/master/img/chapter9_VirtualMemory.png" alt="VirtualMemory"></p>
+<ul>
+<li><strong>内核虚拟内存</strong>包含</li>
+</ul>
+<ol>
+<li>内核中的代码和数据</li>
+<li>内核虚拟存储器的某些区域被映射到所有进程共享的物理页面，如:内核代码，全局数据结构</li>
+<li>内核虚拟存储器包含每个进程不相同的数据，如页表，内核在进程上下文中时使用的栈，等等</li>
+</ol>
+<ul>
+<li><strong>Linux缺页异常处理</strong></li>
+</ul>
+<p>（1）虚拟地址A是合法的吗，即A在某个区域结构定义的区域内吗?</p>
+<ol>
+<li>缺页处理程序搜索区域结构链表</li>
+<li>把A和每个区域的vm_start和vm_end做比较，通过某种树的数据结构算法查找</li>
+<li>如果不合法，触发段错误。</li>
+</ol>
+<p>（2）试图访问的存储器是否合法，即是否有读，写，执行这个页面的权限?</p>
+<ol>
+<li>如果不合法，触发保护异常，终止进程。</li>
+<li>一切正常的话，选择牺牲页，替换，重新执行指令</li>
+</ol>
+<h1 id="6">6.内存映射</h1>
+<ul>
+<li>
+<p><strong>内存映射：</strong> Linux通过将一个虚拟内存区域与一个磁盘上的对象关联起来，以初始化这个虚拟内存区域的内容</p>
+</li>
+<li>
+<p>一个对象被映射到虚拟存储器的一个区域，可分为 <strong>共享对象</strong> 、 <strong>私有对象</strong></p>
+</li>
+<li>
+<p><strong>共享对象</strong></p>
+</li>
+</ul>
+<ol>
+<li>一个进程将一个共享对象映射到它的虚拟地址空间的一个区域</li>
+<li>进程对这个区域的写操作，对于那些也把这个共享对象映射它的虚拟存储器的进程是可见的</li>
+<li>这些变化也会反映到磁盘上的原始对象</li>
+<li>映射到的虚拟存储器那个区域叫做<strong>共享区域</strong></li>
+</ol>
+<p><img src="https://github.com/philyc/philyc.github.io/blob/master/img/chapter9_SharedObject.png" alt="SharedObject"></p>
+<ul>
+<li><strong>共享对象优点</strong></li>
+</ul>
+<ol>
+<li>进程1将共享对象映射到虚拟存储器中，然后虚拟存储器将这一段找一块物理存储器存储</li>
+<li>当进程2也要引用同样的共享对象时，内核迅速判定，进程1已经映射了这个对象</li>
+<li>使进程2的虚拟存储器直接指向了那一块进程1指向的物理存储器</li>
+<li>即使对象被映射到多个共享区域，物理存储器依旧只有一个共享对象的拷贝</li>
+<li>大大解决了物理存储器内存</li>
+</ol>
+<ul>
+<li><strong>私有对象</strong></li>
+</ul>
+<ol>
+<li>对一个映射到私有对象的区域做出的改变，对于其他进程<strong>不可见</strong></li>
+<li>并且进行的写操作不会反映到磁盘上</li>
+<li>映射到的虚拟存储器那个区域叫做<strong>私有区域</strong></li>
+</ol>
+<p><img src="https://github.com/philyc/philyc.github.io/blob/master/img/chapter9_PrivitedObject.png" alt="PrivitedObject"></p>
+<ul>
+<li><strong>私有对象的实现——写时拷贝</strong></li>
+</ul>
+<ol>
+<li>私有对象开始生命周期的方式基本与共享对象一样。即使对象被多个引用，在物理内存都只保留一个拷贝</li>
+<li>对于每个映射私有对象的进程，相应私有区域的页表条目都被标记为只读。并且区域结构被标记为私有的写时拷贝</li>
+<li>只要有进程试图写私有区域内的某个页面，那么这个写操作触发保护异常</li>
+<li>故障处理程序会在物理存储器中创建被修改页面的一个新拷贝</li>
+<li>更新页表条目(PTE)指向这个新的拷贝，恢复被修改页面的可写权限</li>
+<li>故障处理程序返回，CPU重新执行这个写操作</li>
+<li>通过延迟私有对象中的拷贝直到最后可能的时刻，写时拷贝充分使用了稀缺的物理存储器</li>
+</ol>
+<h1 id="7">7.动态内存分配</h1>
+<p>动态内存分配器维护着一个进程的虚拟存储区域，称为<strong>堆</strong> ，堆中只有两种状态</p>
+<ul>
+<li><strong>已分配</strong></li>
+</ul>
+<ol>
+<li>已分配的块显式地保留供应用程序使用</li>
+<li>已分配的块保持已分配状态，直到它被释放</li>
+<li>这种释放要么是应用程序显示执行</li>
+<li>要么是存储器分配器自身隐式执行(JAVA)</li>
+</ol>
+<ul>
+<li><strong>空闲</strong></li>
+</ul>
+<ol>
+<li>空闲块可用于分配</li>
+<li>空闲快保持空闲，直到显式地被应用分配</li>
+</ol>
+<p>存在两种分配器</p>
+<ul>
+<li><strong>显式分配器</strong>：要求应用程序显式地释放</li>
+</ul>
+<ol>
+<li>C语言——malloc和free</li>
+<li>C++——new和delete</li>
+</ol>
+<ul>
+<li><strong>隐式分配器</strong>：要求分配器检测一个已分配块何时不再被程序所使用，那么就释放这个块，又叫做垃圾收集器</li>
+</ul>
+<ol>
+<li>Lisp,ML以及Java等依赖这种分配器</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Phi </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B9%9D%E7%AB%A0/>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B9%9D%E7%AB%A0/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://philyc.github.io/tags/csapp/">
+                    #CSAPP</a></span>
+            
+            <span class="tag"><a href="https://philyc.github.io/tags/reading-notes/">
+                    #Reading notes</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://philyc.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%85%AB%E7%AB%A0/" class="prev" rel="prev" title="《CSAPP》笔记——第八章"><i class="iconfont icon-left"></i>&nbsp;《CSAPP》笔记——第八章</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://philyc.github.io/">Phi</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

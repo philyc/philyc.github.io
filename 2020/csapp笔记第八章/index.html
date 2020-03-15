@@ -10,7 +10,7 @@
   
   
   <link rel="prev" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B8%83%E7%AB%A0/" />
-  
+  <link rel="next" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B9%9D%E7%AB%A0/" />
   <link rel="canonical" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%85%AB%E7%AB%A0/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -57,7 +57,7 @@
     "datePublished": "2020-03-14 13:54:26 \x2b0800 CST",
     "dateModified" : "2020-03-14 13:54:26 \x2b0800 CST",
     "url" : "https:\/\/philyc.github.io\/2020\/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%85%AB%E7%AB%A0\/",
-    "wordCount" : "3353",
+    "wordCount" : "3344",
     "keywords" : [ "CSAPP","Reading notes", "Phi\x27s Blog"]
 }
 </script>
@@ -319,7 +319,7 @@
 </ol>
 <ul>
 <li>
-<p>在进程执行的某些时刻，内核可以决定抢占当前进程，并重新开始一个先前被抢占的进程。这种决定叫做<strong>调度</strong>,由内核中称为<strong>调度器</strong>的代码处理的</p>
+<p>在进程执行的某些时刻，内核可以决定抢占当前进程，并重新开始一个先前被抢占的进程。这种决定叫做<strong>调度</strong>，由内核中称为<strong>调度器</strong>的代码处理的</p>
 </li>
 <li>
 <p>当内核选择一个新的进程运行时，我们就说内核调度了这个进程，使用上下文切换的机制来控制转移到新的进程，有两种可能情况</p>
@@ -345,11 +345,11 @@
 </li>
 </ul>
 <ol>
-<li>提高了软件开发的抽象度；</li>
-<li>程序员可以将精力集中在实际的问题上而不用分心来管理内存的问题；</li>
-<li>可以使模块的接口更加的清晰，减小模块间的偶合；</li>
-<li>大大减少了内存人为管理不当所带来的Bug；</li>
-<li>使内存管理更加高效。</li>
+<li>提高了软件开发的抽象度</li>
+<li>程序员可以将精力集中在实际的问题上而不用分心来管理内存的问题</li>
+<li>可以使模块的接口更加的清晰，减小模块间的偶合</li>
+<li>大大减少了内存人为管理不当所带来的Bug</li>
+<li>使内存管理更加高效</li>
 </ol>
 <p><strong>GC原理</strong>：GC通过遍历应用程序中的“根”来寻找垃圾。我们可以认为根是一个指向引用类型对象内存地址的指针。如果一个对象没有了根，就是它不再被任何位置所引用，那么它就是垃圾的候选者</p>
 <p>常见的GC回收算法</p>
@@ -386,7 +386,7 @@
 <li>底层的信号：当底层发生硬件异常，信号通知 <strong>用户进程</strong> 发生了这些异常</li>
 </ul>
 <ol>
-<li>除以0：发送SIGILL信号。</li>
+<li>除以0：发送SIGILL信号</li>
 <li>非法存储器引用：发送SIGSEGV信号</li>
 </ol>
 <ul>
@@ -394,7 +394,7 @@
 </ul>
 <ol>
 <li>键入ctrl+c:发送SIGINT信号</li>
-<li>一个进程可以发送给另一个进程SIGKILL信号强制终止它。</li>
+<li>一个进程可以发送给另一个进程SIGKILL信号强制终止它</li>
 <li>子进程终止或者停止，内核会发送一个SIGCHLD信号给父进程。</li>
 </ol>
 <p>传送一个信号到目的进程分为两个步骤</p>
@@ -410,11 +410,11 @@
 </ul>
 <ol>
 <li>进程可以忽略这个信号，终止。</li>
-<li>或通过一个称为<strong>信号处理程序</strong>的用户层函数捕获这个信号。</li>
+<li>或通过一个称为<strong>信号处理程序</strong>的用户层函数捕获这个信号</li>
 </ol>
 <p>一个只发出而没有被接收的信号叫做<strong>待处理信号</strong></p>
 <ol>
-<li>一种类型至多只有一个待处理信号。</li>
+<li>一种类型至多只有一个待处理信号</li>
 <li>如果一个进程有一个类型为k的待处理信号，那么接下来发送到这个进程类型为k的信号都会被简单的丢弃</li>
 </ol>
 <p><strong>接收信号：</strong> 当内核从一个异常处理程序返回，准备将控制传递给进程p时，它会检查进程p的 <strong>未被阻塞的待处理信号的集合</strong></p>
@@ -471,6 +471,8 @@
         
         <a href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B8%83%E7%AB%A0/" class="prev" rel="prev" title="《CSAPP》笔记——第七章"><i class="iconfont icon-left"></i>&nbsp;《CSAPP》笔记——第七章</a>
          
+        
+        <a href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B9%9D%E7%AB%A0/" class="next" rel="next" title="《CSAPP》笔记——第九章">《CSAPP》笔记——第九章&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 
