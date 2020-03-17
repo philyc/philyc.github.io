@@ -6,10 +6,19 @@
     <description>Recent content in Reading notes on Phi&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 14 Mar 2020 20:44:05 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Mar 2020 11:41:14 +0800</lastBuildDate>
     
 	<atom:link href="https://philyc.github.io/tags/reading-notes/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>《CSAPP》笔记——第十章</title>
+      <link>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%8D%81%E7%AB%A0/</link>
+      <pubDate>Mon, 16 Mar 2020 11:41:14 +0800</pubDate>
+      
+      <guid>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%8D%81%E7%AB%A0/</guid>
+      <description>1.I/O 输入/输出(I/O) : 是指主存和外部设备(如磁盘，终端，网络)之间拷贝数据过程 高级别I/O函数，包括scanf和printf，&amp;laquo</description>
+    </item>
     
     <item>
       <title>《CSAPP》笔记——第九章</title>
