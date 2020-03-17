@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Phi">
+  
+  
+  
+  <link rel="prev" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0/" />
+  
+  <link rel="canonical" href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           《CSAPP》笔记——第十二章 | Phi&#39;s Blog
+       
+  </title>
+  <meta name="title" content="《CSAPP》笔记——第十二章 | Phi&#39;s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/philyc.github.io\/"
+    },
+    "articleSection" : "posts",
+    "name" : "《CSAPP》笔记——第十二章",
+    "headline" : "《CSAPP》笔记——第十二章",
+    "description" : "CSAPP Reading notes-chapter 10.",
+    "inLanguage" : "zh-cn",
+    "author" : "Phi",
+    "creator" : "Phi",
+    "publisher": "Phi",
+    "accountablePerson" : "Phi",
+    "copyrightHolder" : "Phi",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-03-17 22:29:51 \x2b0800 CST",
+    "dateModified" : "2020-03-17 22:29:51 \x2b0800 CST",
+    "url" : "https:\/\/philyc.github.io\/2020\/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0\/",
+    "wordCount" : "2846",
+    "keywords" : [ "CSAPP","Reading notes", "Phi\x27s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://philyc.github.io/">Phi&#39;s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://philyc.github.io/">Phi&#39;s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">《CSAPP》笔记——第十二章</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://philyc.github.io/" rel="author">Phi</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2020-03-17 itemprop="datePublished">March 17, 2020</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://philyc.github.io/categories/book/"> Book </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <h1 id="1">1.并发</h1>
+<p>如果逻辑控制流在时间上是重叠，那么它们就是<strong>并发</strong>的，操作系统提供三种基本的构造并发程序的方法:<strong>进程、I/O多路复用、线程</strong></p>
+<h2 id="heading"><strong>进程</strong></h2>
+<ol>
+<li>每个逻辑控制流 都是一个进程，由内核来调度和维护</li>
+<li>因为<strong>进程有独立的虚拟地址空间</strong>，和其他进程通信，控制流必须使用某种显式的进程间通信IPC进制</li>
+</ol>
+<p>基于进程的并发编程，对于在父，子进程间共享状态信息，进程有一个非常清晰的模型</p>
+<ul>
+<li>共享<strong>文件表</strong>，但是不共享<strong>用户地址空间</strong></li>
+<li>进程拥有<strong>独立的虚拟地址空间</strong></li>
+</ul>
+<ol>
+<li>优点:一个进程不可能不小心覆盖另一个进程的虚拟存储空间，消除许多令人迷惑的错误</li>
+<li>缺点:独立的地址空间使得进程间共享信息也很困难，必须使用显式的IPC(进程间通信)机制，速度比较慢，进程控制和IPC的开销都很大</li>
+</ol>
+<h2 id="io"><strong>I/O多路复用</strong></h2>
+<ol>
+<li>应用程序在一个进程的上下文中显示地调度它们自己的逻辑流</li>
+<li>逻辑流被模型化为状态机，数据到达文件描述符后，主程序显式地从一个状态转换到另一个状态</li>
+<li>因为程序是一个单独的进程，所以所有的流都共享同一个地址空间</li>
+</ol>
+<ul>
+<li>使用select函数，要求内核挂起进程，只有一个或多个I/O事件发生后，才将控制返回给应用程序</li>
+</ul>
+<h2 id="heading-1"><strong>线程</strong></h2>
+<ol>
+<li>线程是运行在一个单一进程上下文中的逻辑流，由内核调度</li>
+<li>像进程一样由内核进行调度</li>
+<li>而且像I/O多路复用一流一样<strong>共享一个虚拟地址空间</strong></li>
+</ol>
+<ul>
+<li>
+<p>线程就是运行在进程上下文中的逻辑流，由内核调度，每个线程都有它自己的线程上下文。</p>
+</li>
+<li>
+<p><strong>不共享</strong></p>
+</li>
+</ul>
+<ol>
+<li>包括一个唯一的整数线程ID(Thread ID,TID).</li>
+<li>栈和栈指针</li>
+<li>程序计数器</li>
+<li>通用目的寄存器和条件码</li>
+</ol>
+<ul>
+<li><strong>共享</strong></li>
+</ul>
+<ol>
+<li>所有运行在该进程里的线程共享<strong>该进程的整个虚拟地址空间</strong></li>
+<li>共享 <strong>包括代码，数据，堆，共享库和打开的文件</strong></li>
+</ol>
+<ul>
+<li>与进程执行时区别</li>
+</ul>
+<ol>
+<li>线程的上下文切换的开销比进程的小得多，快得多</li>
+<li>线程不是按照严格的父子层次来组织</li>
+<li>和一个进程相关的线程组成一个线程池</li>
+</ol>
+<h1 id="2">2.线程同步</h1>
+<h2 id="heading-2"><strong>共享变量</strong></h2>
+<p>共享变量十分方便，但是他们也引入了<strong>同步错误</strong>的可能性。同一个程序每次运行的顺序都可能不同，这些顺序中有一些将会产生正确结果，但是其他的不会，这就是同步错误</p>
+<h2 id="heading-3"><strong>信号量</strong></h2>
+<p>具有非负整数值的全局变量，只能由两种特殊的操作来处理，这两种操作称为P和V</p>
+<ul>
+<li>P(s),Proberen，测试</li>
+</ul>
+<ol>
+<li>如果s是非零的，那么P操作将s减1，并且立即返回</li>
+<li>如果s为零，那么就挂起这个线程，直到s变为非零</li>
+<li>而一个V操作会重启这个线程</li>
+<li>在重启之后，P操作将s减1，并将控制返回给调用者</li>
+</ol>
+<ul>
+<li>V(s),Verhogen，增加</li>
+</ul>
+<ol>
+<li>V操作将s加1.</li>
+<li>如果有任何线程阻塞在P操作等待s变成非零，那么V操作随机会重启这些线程中的一个。</li>
+<li>然后将s减去1，完成它的P操作。</li>
+</ol>
+<ul>
+<li>P操作和V操作都是不可分割的，也就是自身确保了是一个带有安全轨迹的操作</li>
+<li>P和V的定义确保了一个正在运行的程序绝不可能进入这样一种状态，也就是<strong>不可能有负值</strong>，这个属性叫做<strong>信号量不变性</strong></li>
+<li>将每个共享变量(或一组相关的共享变量) 与一个信号量s联系起来，然后用P(s)和V(s)操作相应的临界区包围起来</li>
+</ul>
+<h1 id="3">3.利用信号量</h1>
+<h2 id="heading-4">互斥锁</h2>
+<ul>
+<li>提供互斥为目的的二元信号量常常也称为<strong>互斥锁</strong>(mutex)</li>
+</ul>
+<ol>
+<li>在一个互斥锁上执行P操作叫做互斥锁加锁</li>
+<li>在一个互斥锁上执行V操作叫做互斥锁解锁</li>
+<li>对一个互斥锁加了锁还没有解锁的线程称为占用这个互斥锁</li>
+</ol>
+<h2 id="--"><strong>生产者-消费者</strong> 问题</h2>
+<ul>
+<li><strong>生产者线程</strong>反复地生成新的项目，并把它们插入到缓冲区中</li>
+<li><strong>消费者线程</strong>不断地从缓冲区取出这些项目，然后消费使用它们</li>
+<li>插入和取出项目都涉及<strong>更新共享变量</strong></li>
+</ul>
+<ol>
+<li>必须保证对缓冲区的访问是互斥的</li>
+<li>还需要调度对缓冲区的访问</li>
+<li>如果缓冲区是满的，那么生产者必须等待直到有一个槽位变为可用</li>
+<li>如果缓冲区是空的，那么消费者必须等待知道有一个项目变为可用</li>
+</ol>
+<h2 id="---1"><strong>读者-写者</strong> 问题</h2>
+<ul>
+<li>一组并发的线程要访问同一个数据对象</li>
+<li>修改对象的线程叫做<strong>写者</strong></li>
+<li>只读对象的线程叫做<strong>读者</strong></li>
+</ul>
+<ol>
+<li>写者必须拥有对对象的独占访问</li>
+<li>读者可以和无限多个其他读者共享对象</li>
+<li>一般来说有无数个并发的读者和写者</li>
+</ol>
+<h3 id="-">第一类读者-写者问题</h3>
+<ul>
+<li>
+<p>读者优先，要求不让<strong>读者</strong>等待，除非已经把一个使用权限赋予了一个写者。换句话说，读者不会因为有一个写者在等待而等待</p>
+</li>
+<li>
+<p>信号量w控制对访问共享对象的临街区的访问</p>
+</li>
+<li>
+<p>读者</p>
+</li>
+</ul>
+<ol>
+<li>w只对第一个读者上锁</li>
+<li>w对最后一个走的读者解锁</li>
+</ol>
+<ul>
+<li>写者</li>
+</ul>
+<ol>
+<li>写者只要进入临界区就对w上锁</li>
+<li>写者只要离开临界区就对w解锁</li>
+</ol>
+<h3 id="--1">第二类读者-写者问题</h3>
+<ul>
+<li>写者优先，要求一但一个<strong>写者</strong>准备好可以写，它就会尽可能地完成它的写操作。同第一类不同，在一个写者到达后的读者必须等待，即使这个写者也是在等待</li>
+</ul>
+<h1 id="4">4.线程安全</h1>
+<p>四种线程不安全函数类</p>
+<ul>
+<li><strong>不保护共享变量</strong>的函数</li>
+</ul>
+<ol>
+<li>解决方案，利用P，V这样的同步操作来保护共享的变量</li>
+</ol>
+<ul>
+<li>保持<strong>跨越多个调用状态</strong>的函数，因为产生的结果依赖于上一个next的值</li>
+</ul>
+<ol>
+<li>解决方案: 重写</li>
+<li>使得它不能依赖static，而是依靠调用者在参数中传递状态信息</li>
+<li>缺点: 需要在曾经成千上百个不同的调用位置，修改，十分麻烦</li>
+</ol>
+<ul>
+<li><strong>返回指向静态变量的指针</strong>的函数，因为一个正在被一个线程使用的变量，可能偷偷被另一个线程悄悄覆盖</li>
+</ul>
+<ol>
+<li>解放方案：重写函数:让调用者传递存放的结果的指针</li>
+<li>加锁-拷贝技术:在一个调用位置，互斥锁加锁。调用线程不安全函数，将函数返回的结构拷贝到一个私有的存储器。然后互斥锁，解锁。</li>
+</ol>
+<ul>
+<li><strong>调用线程不安全函数</strong>的函数</li>
+</ul>
+<h1 id="5">5.死锁</h1>
+<ul>
+<li>
+<p>指多个进程在运行过程中因争夺资源而造成的一种僵局，当进程处于这种僵持状态时，若无外力作用，它们都将无法再向前推进</p>
+</li>
+<li>
+<p>产生死锁的<strong>必要条件</strong></p>
+</li>
+</ul>
+<ol>
+<li>互斥条件：进程要求对所分配的资源进行排它性控制，即在一段时间内<strong>某资源仅为一进程所占用</strong></li>
+<li>请求和保持条件：当进程因请求资源而<strong>阻塞时，对已获得的资源保持</strong>不放</li>
+<li>不剥夺条件：进程已获得的资源在未使用完之前，<strong>不能剥夺</strong>，只能在使用完时<strong>由自己释放</strong></li>
+<li>环路等待条件：在发生死锁时，必然存在一个进程&ndash;资源的<strong>环形链</strong></li>
+</ol>
+<h2 id="heading-5">解决死锁的基本方法</h2>
+<ul>
+<li><strong>预防死锁</strong></li>
+</ul>
+<ol>
+<li>资源<strong>一次性分配</strong>：一次性分配所有资源，这样就不会再有请求了：（破坏请求条件）</li>
+<li>只要有一个资源<strong>得不到分配</strong>，也给这个进程<strong>不分配其他的资源</strong>：（破坏请保持条件）</li>
+<li>可剥夺资源：即当某进程获得了部分资源，但<strong>得不到其它资源</strong>，则<strong>释放已占有的资源</strong>（破坏不可剥夺条件）</li>
+<li>资源有序分配法：系统给每类资源赋予一个编号，每一个进程<strong>按编号递增的顺序请求资源，释放则相反</strong>（破坏环路等待条件）</li>
+</ol>
+<ul>
+<li><strong>避免死锁</strong></li>
+</ul>
+<ol>
+<li><strong>银行家算法</strong></li>
+<li>首先需要定义状态和安全状态的概念。系统的状态是当前给进程分配的资源情况</li>
+<li>因此，状态包含两个向量Resource（系统中每种资源的总量）和Available（未分配给进程的每种资源的总量）及两个矩阵Claim（表示进程对资源的需求）和Allocation（表示当前分配给进程的资源）</li>
+<li>安全状态是指至少有一个资源分配序列不会导致死锁。当进程请求一组资源时，假设同意该请求，从而改变了系统的状态，然后确定其结果是否还处于安全状态</li>
+<li>如果是，同意这个请求；如果不是，阻塞该进程直到同意该请求后系统状态仍然是安全的</li>
+</ol>
+<ul>
+<li><strong>检测死锁</strong></li>
+</ul>
+<ol>
+<li>首先为每个进程和每个资源指定一个唯一的号码</li>
+<li>然后建立资源分配表和进程等待表</li>
+</ol>
+<ul>
+<li><strong>解除死锁</strong></li>
+</ul>
+<ol>
+<li>剥夺资源：从其它进程剥夺足够数量的资源给死锁进程，以解除死锁状态；</li>
+<li>撤消进程：可以直接撤消死锁进程或撤消代价最小的进程，直至有足够的资源可用，死锁状态消除为止；所谓代价是指优先级、运行代价、进程的重要性和价值等</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Phi </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0/>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://philyc.github.io/tags/csapp/">
+                    #CSAPP</a></span>
+            
+            <span class="tag"><a href="https://philyc.github.io/tags/reading-notes/">
+                    #Reading notes</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://philyc.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0/" class="prev" rel="prev" title="《CSAPP》笔记——第十一章"><i class="iconfont icon-left"></i>&nbsp;《CSAPP》笔记——第十一章</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://philyc.github.io/">Phi</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

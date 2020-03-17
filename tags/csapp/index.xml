@@ -6,10 +6,19 @@
     <description>Recent content in CSAPP on Phi&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 17 Mar 2020 16:17:32 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 17 Mar 2020 22:29:51 +0800</lastBuildDate>
     
 	<atom:link href="https://philyc.github.io/tags/csapp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>《CSAPP》笔记——第十二章</title>
+      <link>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0/</link>
+      <pubDate>Tue, 17 Mar 2020 22:29:51 +0800</pubDate>
+      
+      <guid>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0/</guid>
+      <description>1.并发 如果逻辑控制流在时间上是重叠，那么它们就是并发的，操作系统提供三种基本的构造并发程序的方法:进程、I/O多路复用、线程 进程 每个逻辑控</description>
+    </item>
     
     <item>
       <title>《CSAPP》笔记——第十一章</title>
