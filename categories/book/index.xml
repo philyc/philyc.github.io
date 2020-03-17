@@ -6,10 +6,19 @@
     <description>Recent content in Book on Phi&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 16 Mar 2020 11:41:14 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 17 Mar 2020 16:17:32 +0800</lastBuildDate>
     
 	<atom:link href="https://philyc.github.io/categories/book/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>《CSAPP》笔记——第十一章</title>
+      <link>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0/</link>
+      <pubDate>Tue, 17 Mar 2020 16:17:32 +0800</pubDate>
+      
+      <guid>https://philyc.github.io/2020/csapp%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0/</guid>
+      <description>1,网络编程 每个网络应用程序都是基于 客户端 - 服务器 模型的，一个应用是由一个服务器进程和一个或多个客户端进程组成 客户端-服务器模型中的基本操作</description>
+    </item>
     
     <item>
       <title>《CSAPP》笔记——第十章</title>
