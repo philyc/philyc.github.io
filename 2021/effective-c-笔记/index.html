@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Phi">
+  
+  
+  
+  <link rel="prev" href="https://philyc.github.io/2020/tinyweb%E6%90%AD%E5%BB%BA%E4%B8%AD%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98/" />
+  <link rel="next" href="https://philyc.github.io/2021/more-effective-c-%E7%AC%94%E8%AE%B0/" />
+  <link rel="canonical" href="https://philyc.github.io/2021/effective-c-%E7%AC%94%E8%AE%B0/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           《Effective C&#43;&#43;》笔记 | Phi&#39;s Blog
+       
+  </title>
+  <meta name="title" content="《Effective C&#43;&#43;》笔记 | Phi&#39;s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/philyc.github.io\/"
+    },
+    "articleSection" : "posts",
+    "name" : "《Effective C\x2b\x2b》笔记",
+    "headline" : "《Effective C\x2b\x2b》笔记",
+    "description" : "Effective C\x2b\x2b Reading notes",
+    "inLanguage" : "zh-cn",
+    "author" : "Phi",
+    "creator" : "Phi",
+    "publisher": "Phi",
+    "accountablePerson" : "Phi",
+    "copyrightHolder" : "Phi",
+    "copyrightYear" : "2021",
+    "datePublished": "2021-05-29 15:28:02 \x2b0800 CST",
+    "dateModified" : "2021-05-29 15:28:02 \x2b0800 CST",
+    "url" : "https:\/\/philyc.github.io\/2021\/effective-c-%E7%AC%94%E8%AE%B0\/",
+    "wordCount" : "7050",
+    "keywords" : [ "C\x2b\x2b","Reading notes", "Phi\x27s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://philyc.github.io/">Phi&#39;s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://philyc.github.io/">Phi&#39;s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">《Effective C&#43;&#43;》笔记</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://philyc.github.io/" rel="author">Phi</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2021-05-29 itemprop="datePublished">May 29, 2021</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://philyc.github.io/categories/book/"> Book </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p>《Effective C++》读书笔记，记录书中基础和重要的知识，附带整理一些相关的知识</p>
+<h1 id="一习惯c">一、习惯C++</h1>
+<h2 id="1视c为一个语言联邦">1.视C++为一个语言联邦</h2>
+<h2 id="2尽量使用const等替换define">2.尽量使用const等替换#define</h2>
+<h2 id="3尽可能使用const">3.尽可能使用const</h2>
+<ol>
+<li>
+<p>const可以作用于：变量、指针、函数参数类型、类中的常函数。const可以防止变量被意外的修改，有助于编译器检测这些意外改变。</p>
+</li>
+<li>
+<p>当non-const和const实现相同逻辑时，non-const对象可以调用const成员函数，这样可以缩减代码量。const对象不能调用non-const成员函数，编译报错：discards qualifiers。</p>
+</li>
+</ol>
+<p><strong>Link：</strong></p>
+<ul>
+<li>const对象被mutable修饰可以修改。</li>
+<li>const可以被四大转化符中const_cast进行转型，其他的是static_cast,dynamic_cast,reinterpert_cast。</li>
+<li>const与<em>处于左右边时含义分别位const指针与const内容。const * &ndash;&gt;内容不可变，</em> const  &ndash;&gt;指针不可变。</li>
+<li>const修饰成员变量时，只能在初始化列表中进行初始化——(需要与static进行区分)。</li>
+<li>构造函数和静态函数不能成为const函数——(static静态成员是属于类的，而不属于某个具体的对象，所有的对象共用static成员。this指针是某个具体对象的地址，因此static成员函数没有this指针。而函数中的const其实就是用来修饰this指针的，意味this指向的内容不可变，所以const不能用来修饰static成员函数)。</li>
+</ul>
+<h2 id="4确定对象使用前被初始化">4.确定对象使用前被初始化</h2>
+<ol>
+<li>
+<p>在构造函数的初始化列表中的才算是初始化，而构造函数的内容是在初始化列表之后执行。</p>
+</li>
+<li>
+<p>不同编译单元的non-local static对象初始化相对次序并无明确定义，以local对象替换得以免除问题。</p>
+</li>
+</ol>
+<p><strong>Link：</strong></p>
+<ul>
+<li>成员变量在使用初始化列表初始化时，与构造函数中初始化成员列表的顺序无关，只与定义成员变量的顺序有关。因为成员变量的初始化次序是根据变量在内存中次序有关，而内存中的排列顺序早在编译期就根据变量的定义次序决定了。</li>
+<li>如果不使用初始化列表初始化，在构造函数内初始化时，此时与成员变量在构造函数中的位置有关。</li>
+<li>类成员在定义时，是不能初始化的/类中const成员常量必须在构造函数初始化列表中初始化/类中static成员变量，必须在类外初始化。</li>
+<li>初始化顺序 1.基类的静态变量或全局变量
+2 派生类的静态变量或全局变量
+3 基类的成员变量
+4 派生类的成员变量。</li>
+</ul>
+<h1 id="二构造析构赋值运算">二、构造/析构/赋值运算</h1>
+<h2 id="5c默认编写并调用的函数">5.C++默认编写并调用的函数</h2>
+<p>编译器默认实现的函数：默认构造、析构、拷贝构造、赋值函数</p>
+<p><strong>Link：</strong></p>
+<ul>
+<li>深拷贝与浅拷贝：浅拷贝只复制指向某个对象的指针,而不复制对象本身,新旧对象还是共享同一块内存。深拷贝会另外创造一个一模一样的对象,新对象跟原对象不共享内存,修改新对象不会改到原对象。</li>
+<li>深拷贝实现方式：</li>
+</ul>
+<p>C++ —— 重载拷贝构造函数或赋值函数</p>
+<p>Js —— 1.使用递归的方式实现深拷贝 2.通过JSON对象实现深拷贝(无法实现对象中方法的深拷贝) 3.通过jQuery的extend方法实现深拷贝 4.Object.assign()拷贝(一级属性是深拷贝，二级后不是) 5.lodash函数库实现深拷贝</p>
+<h2 id="6不想使用默认生成的函数可以明确拒绝">6.不想使用默认生成的函数，可以明确拒绝</h2>
+<p>默认的构造可以被其他构造替换，拷贝构造和赋值函数如果不想被外面调用可以将其声明为private。</p>
+<p><strong>Link：</strong></p>
+<ul>
+<li>单例模式中通过禁用掉默认构造函数防止生成多个实例</li>
+</ul>
+<h2 id="7多态基类声明virtual析构函数">7.多态基类声明virtual析构函数</h2>
+<p>父类析构如果不是virtual，只会释放掉父类对象的空间，出现内存泄漏</p>
+<h2 id="8别让异常逃离析构函数">8.别让异常逃离析构函数</h2>
+<h2 id="9绝不在构造和析构过程中调用virtual函数">9.绝不在构造和析构过程中调用virtual函数</h2>
+<p>父类的构造函数发生在子类之前，而此时子类的成员变量等并未初始化，因此在父类的构造函数中调用virtual函数，绝对不会调用子类的方法</p>
+<p>子类析构函数调用在父类之前，因此在父类析构函数调用virtual函数时，子类都不存在了，你让编译器怎么调用。因此一定不要再构造和析构中调用virtual函数</p>
+<h2 id="10令operator-返回一个reference-to-this">10.令operator= 返回一个reference to *this</h2>
+<p>返回引用比临时变量要少几次构造析构，效率高</p>
+<h2 id="11在operator-中处理自我赋值">11.在operator= 中处理“自我赋值”</h2>
+<ol>
+<li>在复制构造之前别删除原指针</li>
+<li>发现是自己赋值自己的时候（this = &amp;object）直接返回*this即可</li>
+</ol>
+<h2 id="12复制对象的时候勿忘其每个部分">12.复制对象的时候勿忘其每个部分</h2>
+<h1 id="三资源管理">三.资源管理</h1>
+<h2 id="13以对象管理资源">13.以对象管理资源</h2>
+<ol>
+<li>为了防止资源泄漏，请使用RAII对象，在构造函数里面获得资源，并在析构函数里面释放资源</li>
+<li>auto_ptr：被销毁会自动删除它所指之物，复制所得的指针将获得资源的唯一拥有权</li>
+<li>引用计数型智慧指针（RCSP）：持续追踪多少个指针指向该资源，无人指向他时自动删除该资源-&gt;  share_ptr,weak_ptr</li>
+</ol>
+<p><strong>Link:</strong></p>
+<ul>
+<li>RAII- Resource Acquisition Is Initialization，资源获取时就进行初始化-&gt;使用一个对象，在其构造时获取资源，在对象生命期控制对资源的访问使之始终保持有效，最后在对象析构的时候释放资源</li>
+<li>auto_ptr存在一定的异常，已经被弃用，采用unique_ptr进行代替。</li>
+</ul>
+<ol>
+<li>auto_ptr采用copy语义来转移指针资源，转移指针资源的所有权的同时将原指针置为NULL，这与通常的copy语义行为行为是不一致的(不修改原数据)</li>
+<li>E1：sort的快排实现中有将元素复制到某个局部临时对象中，对于auto_ptr而言却将原元素置为null，这就导致最后的排序结果中可能有大量的null</li>
+<li>E2：多个auto_ptr不能管理同一片内存， 执行=的时候，就把原来的auto_ptr给干掉。如果多个auto_ptr管理同一块内存肯定有问题。第一个auto_ptr析构的时候就应该把内存释放掉了, 第二个auto_ptr再析构的时候，就要去释放已经被释放的内存了，导致错误。</li>
+</ol>
+<h2 id="14在资源管理类小心copy行为">14.在资源管理类小心copy行为</h2>
+<p>一般资源管理类复制时可以选择以下做法：</p>
+<ol>
+<li>禁止复制(复制不合理)</li>
+<li>&ldquo;引用计数法&rdquo;(shared_ptr)</li>
+<li>复制底层资源(&ldquo;深拷贝&rdquo;)</li>
+<li>转移底部资源的拥有权（unique_ptr，移动语义）</li>
+</ol>
+<h2 id="15在资源管理类中提供对原始资源的访问">15.在资源管理类中提供对原始资源的访问</h2>
+<h2 id="16成对的使用new和delete">16.成对的使用new和delete</h2>
+<h2 id="17以独立的语句将newd对象置入智能指针">17.以独立的语句将newd对象置入智能指针</h2>
+<p>不要写下类似Function(shared_ptr<!-- raw HTML omitted -->(new Class), x())，其中Function和x为函数，Class是一个类。</p>
+<p>原因在于shared_ptr的构造分为两步，第一步是new Class创建一个对象，第二部是执行构造函数，但是像上面那样写可能导致x()在两步之间运行（与编译器如何编译代码有关了），如果这个时候x()发生了异常，那么就会导致内存泄漏。因此初始化shared_ptr的时候，最好不要掺杂其他东西。</p>
+<h1 id="四设计与声明">四、设计与声明</h1>
+<h2 id="18让接口容易被正确使用不易被误用">18.让接口容易被正确使用，不易被误用</h2>
+<p>shared_ptr支持定制型删除器，可预防DLL问题，可被用来自动解除互斥锁等等</p>
+<h2 id="19设计class犹如设计type">19.设计class犹如设计type</h2>
+<h2 id="20宁以pass-by-refrence-to-const替换pass-by-value">20.宁以pass-by-refrence-to-const替换pass-by-value</h2>
+<ol>
+<li>
+<p>效率问题，pass-by-value会导致很多临时对象的产生和销毁，就会多调用几次构造和析构，因此效率更低</p>
+</li>
+<li>
+<p>对象切割问题，pass-by-value的方式将一个子类对象传入一个参数类型父类的函数，那么拷贝的对象将被切割成只有父类对象被保留。引用可以解决这个问题，因为引用本质上也是指针，就和多态是一样的</p>
+</li>
+<li>
+<p>内置类型，STL迭代器和函数对象一般采用pass-by-value，因为其复制代价很小</p>
+</li>
+</ol>
+<h2 id="21不要返回临时对象的引用">21.不要返回临时对象的引用</h2>
+<ol>
+<li>绝不要返回pointer或reference指向一个local stack对象（在函数退出前被销毁）</li>
+<li>不要返回pointer或reference指向一个heap对象（用户不知道如何delete）</li>
+<li>不要返回pointer或者reference指向local static对象而有可能需要多个这样的对象（同一行不能调用多次该函数，static只有一份）</li>
+</ol>
+<h2 id="22将成员变量申明为private">22.将成员变量申明为private</h2>
+<h2 id="23宁以non-membernon-friend函数替换member函数">23.宁以non-member、non-friend函数替换member函数</h2>
+<h2 id="24若所有参数都需要类型转换请为此采用non-member函数">24.若所有参数都需要类型转换，请为此采用non-member函数</h2>
+<h2 id="25写一个不抛出异常的swap函数">25.写一个不抛出异常的swap函数</h2>
+<p>如果提供一个member swap，也该提供一个non-member swap用来调用前者</p>
+<h1 id="五实现">五、实现</h1>
+<h2 id="26尽可能延后变量定义式出现的时间">26.尽可能延后变量定义式出现的时间</h2>
+<ol>
+<li>
+<p>因为变量（对类而言）的定义，需要承担一次构造函数的时间，在函数结束后还可能承担一次析构函数的时间，假如该变量未被使用，那么构造函数和析构函数的时间就白白浪费了，尤其是在可能发生异常的函数中，假如你过早的定义变量，然后在你使用这个变量之前抛出了异常，那么这个变量的构造函数就没有意义而且降低效率。所以应该尽可能延后变量定义得时间，只有真正使用这个变量的时候才定义它</p>
+</li>
+<li>
+<p>条款4讲过，copy construction的效率 &gt; default construction +assign function，所以最好的做法是直接调用copy construction函数对变量直接进行初始化，而不是先定义，再赋值</p>
+</li>
+</ol>
+<h2 id="27尽量避免转型">27.尽量避免转型</h2>
+<ol>
+<li>
+<p>最好使用C++4个新式的类型转换函数，因为这很容易辨识，代码可读性提高(static_cast、const_cast、dynamic_cast、reinterpert_cast)</p>
+</li>
+<li>
+<p>尽量避免使用dynamic_cast(安全向下转型)，因为这种转换效率很低，一般用虚函数的方式来避免转型</p>
+</li>
+</ol>
+<h2 id="28避免返回一个指针引用或者迭代器指向类内的成员">28.避免返回一个指针、引用或者迭代器指向类内的成员</h2>
+<ol>
+<li>如果返回了成员的引用或者指针，就可以通过这个引用或者指针修改雷内的private成员，这样是不合理的（这样的话成员就相当于public的了），这一点可以通过给函数的返回类型加const修饰符来防止内部成员变量被修改</li>
+<li>如果获得的类内的一个成员的引用或指针，但是在使用之前，对象被释放了，那么这个引用或指针就变成了野指针了，必然会导致core dump错误。所以应该避免返回类内成员的指针或引用。</li>
+</ol>
+<h2 id="29异常安全函数">29.异常安全函数</h2>
+<h2 id="30inline-函数">30.inline 函数</h2>
+<p>　　inline只是一种申请，编译器会根据具体情况来决定一个函数是否可以是inline，like递归函数、virtual函数、代码较多的函数，即使你声明了inline关键字，编译器也不会将此类函数视为inline的函数。</p>
+<h2 id="31编译依存关系降低至最低">31.编译依存关系降低至最低</h2>
+<p>支持”编译依存最小化”的一般构想是：相依于声明式，不要相依于定义式。基于此构想的两个手段是Handle classes和Interface classes</p>
+<ol>
+<li>Handle classes：在.h文件中用class 声明代替include头文件，把成员变量替换为指针的形式</li>
+</ol>
+<ul>
+<li>如果依赖的.h发生改变，当include头文件时，所有使用此类的文件均需要重新编译</li>
+<li>当采用class声明时，并不会导致重新编译</li>
+</ul>
+<ol start="2">
+<li>
+<p>Interface Classes也可以降低编译的依赖，实现方法大致是父类只提供虚方法，而将实现放置在子类中，再通过父类提供的一个特别的静态函数，生成子类对象，通过父类指针来进行操作</p>
+</li>
+<li>
+<p>这两种方式都存在一定的代价：Handle classes方式的实现要多分配指针大小的内存，每次访问都是间接访问。Interface classes形式的实现方式要承担虚函数表的代价以及运行时的查找表的代价</p>
+</li>
+</ol>
+<h1 id="六继承与面向对象设计">六、继承与面向对象设计</h1>
+<h2 id="32确保public继承是is-a关系">32.确保public继承是is-a关系</h2>
+<h2 id="33名称遮掩问题">33.名称遮掩问题</h2>
+<p>编译器对于各作用域有查找顺序，所以会造成名称遮掩，各作用域依次为：</p>
+<ol>
+<li>global作用域</li>
+<li>namespace</li>
+<li>base class</li>
+<li>derived class</li>
+<li>local作用域</li>
+<li>等等</li>
+</ol>
+<p>子类会隐藏父类同名的函数，可以使用类名作用域、利用using声明式或inline转交函数来规避隐藏</p>
+<p><strong>Link</strong></p>
+<ul>
+<li>
+<p><strong>覆盖、重载、隐藏</strong></p>
+</li>
+<li>
+<p><strong>覆盖</strong>(动多态的实现)——
+是指派生类函数覆盖基类函数，特征是：</p>
+</li>
+</ul>
+<ol>
+<li>不同的范围(分别位于派生类与基类)；</li>
+<li>函数名字相同；</li>
+<li>参数相同；</li>
+<li>基类函数必须有virtual 关键字。</li>
+</ol>
+<ul>
+<li><strong>重载</strong>(静多态的实现)——
+是指一个同名函数给予不同参数有多种实现：</li>
+</ul>
+<ol>
+<li>相同的范围(在同一个类中);</li>
+<li>函数名字相同；</li>
+<li>参数不同；</li>
+<li>virtual 关键字可有可无</li>
+<li>不关心返回类型</li>
+</ol>
+<ul>
+<li><strong>隐藏</strong>——
+是指派生类的函数屏蔽了与其同名的基类函数：</li>
+</ul>
+<ol>
+<li>如果派生类的函数与基类的函数同名，但是<strong>参数不同</strong>。此时，<strong>不论有无virtual关键字</strong>，基类的函数将被隐藏(注意别与重载混淆，区别在于重载是在同一个类中，隐藏在不同作用域上)</li>
+<li>如果派生类的函数与基类的函数同名，并且参数也相同，但是<strong>基类函数没有virtual关键字</strong>。此时，基类的函数被隐藏(注意别与覆盖混淆，区别在于基类函数没有virtual关键字)</li>
+</ol>
+<h2 id="34接口继承与实现继承">34.接口继承与实现继承</h2>
+<ol>
+<li>pure virtual函数使derived class只继承函数接口</li>
+<li>impure virtual函数使derived class继承函数接口和缺省实现</li>
+<li>non-virtual函数使derived class继承函数的接口和一份强制性实现</li>
+</ol>
+<h2 id="35考虑virtual函数以外的选择">35.考虑virtual函数以外的选择</h2>
+<h2 id="36不要重新定义继承来的non-virtual函数">36.不要重新定义继承来的non-virtual函数</h2>
+<p>会导致基类的non-virtual函数被隐藏，详见33条中Link</p>
+<h2 id="37不要重新定义重写函数virtual的默认参数">37.不要重新定义重写函数（virtual）的默认参数</h2>
+<p>c++中缺省参数值为静态绑定，因此指针是什么类型，默认参数就是什么类型。</p>
+<p>解决方法是将带有默认参数的函数改为non-virtual函数，内部再调用一个virtual函数。因为non-virtual函数是从来不应该被重写的</p>
+<h2 id="38类与类之间的关系复合has-a的关系">38.类与类之间的关系：复合（has a的关系）</h2>
+<h2 id="39私有继承">39.私有继承</h2>
+<ol>
+<li>Derived还能调用Base中的public和protected的东西(成员函数)，但Derived对象不能调用Base中的任何东西。</li>
+<li>Like Base中的成员函数能调用其private的东西，但Base对象却不能。</li>
+</ol>
+<h2 id="40多重继承">40.多重继承</h2>
+<p>多重继承会涉及到菱形继承、virtual继承导致对象体积大，访问成员变量速度慢等问题，可以使用dynamic_cast来进行向下转化</p>
+<h1 id="七模板与泛型编程">七、模板与泛型编程</h1>
+<h2 id="41隐式接口和编译器多态">41.隐式接口和编译器多态</h2>
+<p>class的继承和template都支持接口和多态。只不过class实现的接口是显式的，就是说一定能直接找到这个接口的实现代码。而template实现的接口，只能模糊的知道接口的特征，一般间接能找到实现的代码。用继承实现的多态属于运行期多态、模板实现的多态则是编译期多态。</p>
+<h2 id="42了解typename">42.了解typename</h2>
+<ol>
+<li>
+<p>在声明template参数时，class和typename可互换。</p>
+</li>
+<li>
+<p>typename的第二个用处是告诉编译期某一个嵌套从属类型是类型，最典型的就是STL中容器的迭代器类型，例如：T::iterator(T是个容器的类型，例如：vector<!-- raw HTML omitted -->)，这个时候就要在T::iterator前面加一个typename，告诉编译器这是一个类型，否则编译器不能确定这是什么，因为有可能iterator是个静态变量或者某一namespace下的变量。</p>
+</li>
+<li>
+<p>类的继承列表和初始化列表中的类型不需要typename指定类型，因为继承的一定是个类，而初始化列表一定是调用父类的构造或者初始化某个成员。</p>
+</li>
+</ol>
+<h2 id="43调用基类模板成员">43.调用基类模板成员</h2>
+<p>当一个类的基类包含模板参数时，需要通过this-&gt;的方式调用基类内的函数，例如 class F: public S<!-- raw HTML omitted -->，在F中的成员函数中调用S中的成员函数test()需要使用this-&gt;test()，直接写test()无法通过编译。原因是因为C是个模板无法确定S中一定有test函数，即使所有C都包含test函数，但是在编译器看来它是不确定这个问题的，因此无法通过编译。</p>
+<p>解决办法是</p>
+<ol>
+<li>使用this-&gt;test，这样做告诉编译器假设这个test已经被继承了。</li>
+<li>使用using声明式：using S<!-- raw HTML omitted -->::test告诉编译期这个test位于S内。相当于必须手动通知编译器这个函数是存在的。</li>
+</ol>
+<h2 id="44将与template参数无关的代码抽离到模板外">44.将与template参数无关的代码抽离到模板外</h2>
+<ol>
+<li>非类型模板参数造成的代码膨胀，用函数参数或者class成员变量替换template参数</li>
+<li>类型模板参数造成的代码膨胀，可以让具有完全相同二进制表述的具现类型共享实现</li>
+</ol>
+<h2 id="45运用成员函数模板接受所有兼容类型">45.运用成员函数模板接受所有兼容类型</h2>
+<p>即使声明了“泛化拷贝构造函数”和“泛化的赋值操作符”，仍然需要声明正常的拷贝构造函数和拷贝赋值操作符</p>
+<h2 id="46需要类型转换时请为模板定义非成员函数">46.需要类型转换时请为模板定义非成员函数</h2>
+<p>template实参推导过程中从不将隐式类型转换函数纳入考虑，而class template并不依赖template实参推导，在生成模板类时就可推导出函数而非函数模板</p>
+<h2 id="47traits编程技巧">47.traits编程技巧</h2>
+<ol>
+<li>traits是用来获取参数类型信息，虽然可以使用typeid进行简单的实现，但是这种做法效率低，因为typeid需要配个if使用，if是在运行期才决定的，而traits可以在编译器就进行类型的判别，效率更高</li>
+<li>怎么在编译期做到判断if呢，方法就是重载函数，重载函数是在编译期就确定了调用哪个的，原理就是和所有名字相同的重载函数比较，直到找到参数类型一致的，这就是编译期实现了if判断</li>
+</ol>
+<p><strong>Link</strong>
+此处涉及模板的特化与偏特化，详见《STL源码剖析》</p>
+<h2 id="48模板元编程">48.模板元编程</h2>
+<h1 id="八定制new和delete">八、定制new和delete</h1>
+<h2 id="49了解new-handler的行为">49.了解new-handler的行为</h2>
+<h2 id="50了解new和delete的合理替换时机">50.了解new和delete的合理替换时机</h2>
+<h2 id="51编写符合常规的new和delete">51.编写符合常规的new和delete</h2>
+<h2 id="52写了placement-new也要写相应的placement-delete">52.写了placement new也要写相应的placement delete</h2>
+<h1 id="九杂项讨论">九、杂项讨论</h1>
+<h2 id="53不要轻忽编译器的警告">53.不要轻忽编译器的警告</h2>
+<h2 id="54让自己熟悉包括tr1在内的标准程序库">54.让自己熟悉包括TR1在内的标准程序库</h2>
+<h2 id="55让自己熟悉boost">55.让自己熟悉Boost</h2>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Phi </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://philyc.github.io/2021/effective-c-%E7%AC%94%E8%AE%B0/>https://philyc.github.io/2021/effective-c-%E7%AC%94%E8%AE%B0/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://philyc.github.io/tags/c&#43;&#43;/">
+                    #C&#43;&#43;</a></span>
+            
+            <span class="tag"><a href="https://philyc.github.io/tags/reading-notes/">
+                    #Reading notes</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://philyc.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://philyc.github.io/2020/tinyweb%E6%90%AD%E5%BB%BA%E4%B8%AD%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98/" class="prev" rel="prev" title="TinyWeb搭建中的问题"><i class="iconfont icon-left"></i>&nbsp;TinyWeb搭建中的问题</a>
+         
+        
+        <a href="https://philyc.github.io/2021/more-effective-c-%E7%AC%94%E8%AE%B0/" class="next" rel="next" title="《More Effective C&#43;&#43;》笔记">《More Effective C&#43;&#43;》笔记&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2021</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://philyc.github.io/">Phi</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

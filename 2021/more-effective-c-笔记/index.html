@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Phi">
+  
+  
+  
+  <link rel="prev" href="https://philyc.github.io/2021/effective-c-%E7%AC%94%E8%AE%B0/" />
+  
+  <link rel="canonical" href="https://philyc.github.io/2021/more-effective-c-%E7%AC%94%E8%AE%B0/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           《More Effective C&#43;&#43;》笔记 | Phi&#39;s Blog
+       
+  </title>
+  <meta name="title" content="《More Effective C&#43;&#43;》笔记 | Phi&#39;s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/philyc.github.io\/"
+    },
+    "articleSection" : "posts",
+    "name" : "《More Effective C\x2b\x2b》笔记",
+    "headline" : "《More Effective C\x2b\x2b》笔记",
+    "description" : "More Effective C\x2b\x2b Reading notes",
+    "inLanguage" : "zh-cn",
+    "author" : "Phi",
+    "creator" : "Phi",
+    "publisher": "Phi",
+    "accountablePerson" : "Phi",
+    "copyrightHolder" : "Phi",
+    "copyrightYear" : "2021",
+    "datePublished": "2021-06-02 10:52:29 \x2b0800 CST",
+    "dateModified" : "2021-06-02 10:52:29 \x2b0800 CST",
+    "url" : "https:\/\/philyc.github.io\/2021\/more-effective-c-%E7%AC%94%E8%AE%B0\/",
+    "wordCount" : "4387",
+    "keywords" : [ "C\x2b\x2b","Reading notes", "Phi\x27s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://philyc.github.io/">Phi&#39;s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://philyc.github.io/">Phi&#39;s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">《More Effective C&#43;&#43;》笔记</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://philyc.github.io/" rel="author">Phi</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2021-06-02 itemprop="datePublished">June 2, 2021</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://philyc.github.io/categories/book/"> Book </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p>《More Effective C++》读书笔记，记录书中基础和重要的知识，附带整理一些相关的知识</p>
+<h1 id="一基础议题basics">一、基础议题(Basics)</h1>
+<h2 id="1指针与引用的区别">1.指针与引用的区别</h2>
+<ul>
+<li>指针是整数，代表的是内存地址，通过*操作符访问该内存地址上的值</li>
+<li>引用是一个变量的别名，底层中引用变量由指针按照指针常量</li>
+<li>可以有空指针，没有空引用，因此引用使用之前不需要判空，因为没有所谓的空引用，而指针使用之前通常得判空</li>
+<li>引用永远指向它最初获得的那个对象</li>
+<li>引用使用时无需解引用(*)</li>
+<li>指针与引用自增时运算意义不同，引用自增引用对象的值，指针自增内存地址</li>
+<li>sizeof引用得到的是其指向对象的大小，sizeof指针得到的是指针的大小</li>
+<li>如果需要返回一个可能会被赋值的左值，返回引用</li>
+</ul>
+<h2 id="2优先考虑c风格的类型转换">2.优先考虑C++风格的类型转换</h2>
+<p>四种类型转化符，static_cast,const_cast,dynamic_cast和reinterpret_cast。</p>
+<ul>
+<li>static_cast: 用于可以进行默认类型转换的类型(取代C中的强制转化符&rdquo;()&quot;)</li>
+<li>const_cast: 专门用来移除变量的常量性。(比如const double到double，主要去除const限定符)</li>
+<li>dynamic_cast: 用于base class 到derived class的类型转换。由于derived class 可能会有新的不能默认初始化的成员，所以转化可能失败，如果失败，返回一个NULL指针。</li>
+<li>reinterpret_cast：最常用的用途是转换函数指针类型，直接根据编译平台对二进制重新进行解释。</li>
+</ul>
+<h2 id="3决不要把多态用于数组">3.决不要把多态用于数组</h2>
+<ol>
+<li>derived class对象一般比base class对象小。所以当使用一个 base class数组存储derived class时，在访问 array[i] 时，会访问array+i*sizeof(base class)的地址，造成访问错误。</li>
+<li>由base指针删除一个derived class数组，结果未定义。因为删除时，析构从最后一个开始，但是计算地址时跟tips1一样，造成访问错误。</li>
+</ol>
+<h2 id="4非必要不提供默认constructor">4.非必要不提供默认constructor</h2>
+<h1 id="二操作符operators">二、操作符(Operators)</h1>
+<h2 id="5对定制的类型转换函数保持警觉">5.对定制的“类型转换函数”保持警觉</h2>
+<ul>
+<li>
+<p>定义类似功能的函数，而抛弃隐式类型转换，使得类型转换必须显示调用。</p>
+</li>
+<li>
+<p>例如 string类没有定义对char*的隐式转换，而是用c_str函数来实施这个转换。</p>
+</li>
+<li>
+<p>拥有单个参数（或除第一个参数外都有默认值的多参数）构造函数的类，很容易被隐式类型转换，最好加上 explicit 防止隐式类型转换</p>
+</li>
+</ul>
+<h2 id="6区别-incrementdecrement操作符的前置和后置形式">6.区别 increment/decrement操作符的前置和后置形式</h2>
+<p>前置是先算后用，后置是先用后算，会产生一个临时对象</p>
+<h2 id="7千万不要重载和操作符">7.千万不要重载&amp;&amp;,||和,操作符</h2>
+<p>不要重载这些操作符，是因为我们无法控制表达式的求解优先级，不能真正模仿这些运算符</p>
+<h2 id="8理解new和delete在不同情形下的含义">8.理解new和delete在不同情形下的含义</h2>
+<ul>
+<li><strong>new</strong>的执行过程：</li>
+</ul>
+<ol>
+<li>调用operator new分配内存</li>
+<li>调用构造函数生成类对象</li>
+<li>返回相应指针</li>
+</ol>
+<ul>
+<li><strong>delete</strong>的执行过程：</li>
+</ul>
+<ol>
+<li>调用指针指向的对象的析构函数</li>
+<li>释放该对象占用的内存</li>
+</ol>
+<h1 id="三异常exceptions">三、异常(Exceptions)</h1>
+<h2 id="9使用析构函数防止资源泄漏">9.使用析构函数防止资源泄漏</h2>
+<p>利用智能指针对象来管理</p>
+<h2 id="10防止构造函数里的资源泄漏">10.防止构造函数里的资源泄漏</h2>
+<ul>
+<li>一般建议不要在构造函数里做过多的资源分配，而应该把这些操作放在一个类似于 init 的成员函数中去完成</li>
+<li>这样当init成员函数抛出异常时，如果对象是在栈上，析构函数仍会被调用(异常会自动销毁局部对象，调用局部对象的析构函数，见下面)，如果是在堆上，需要在捕获异常之后delete对象来调用析构函数</li>
+</ul>
+<h2 id="11禁止异常流出destructors之外">11.禁止异常流出destructors之外</h2>
+<p>不建议在析构函数中抛出异常，如果异常不可避免，则应在析构函数内捕获，而不应当抛出</p>
+<h2 id="12理解抛出异常与传递参数或调用虚函数之间的不同">12.理解抛出异常与传递参数或调用虚函数之间的不同</h2>
+<ul>
+<li>
+<p>异常处理中，支持的类型转换只有两种，一是从&quot;有型指针&quot;转为&quot;无型指针&rdquo;，所以用 const void* 可以捕捉任何指针类型的 exception。另一种是继承体系中的类转换。</p>
+</li>
+<li>
+<p>不要抛出一个指向局部对象的指针，因为该局部对象会在exception离开作用域时被销毁，catch会获得一个指向“已被销毁的对象”的指针。</p>
+</li>
+<li>
+<p>Exception objects必定会造成复制行为，throw出的异常总是其他对象的副本，即使是引用，catch端也只能修改到副本。</p>
+</li>
+<li>
+<p>异常处理可以出现多个 catch 子句，而匹配方式是按先后顺序来匹配的，而虚函数则是根据虚函数表来的</p>
+</li>
+</ul>
+<h2 id="13通过引用捕获异常">13.通过引用捕获异常</h2>
+<p>请尽量使用引用方式来捕捉异常，它可以避免 new 对象的删除问题，也可以正确处理继承关系的多态问题，还可以减少异常对象的复制次数</p>
+<h2 id="14明智运用exception-specifications">14.明智运用exception specifications</h2>
+<h2 id="15了解异常处理的成本">15.了解异常处理的成本</h2>
+<h1 id="四效率efficiency">四、效率(Efficiency)</h1>
+<h2 id="16谨记-80-20-法则">16.谨记 80-20 法则</h2>
+<h2 id="17考虑使用-lazy-evaluation缓式评估">17.考虑使用 lazy evaluation（缓式评估）</h2>
+<ul>
+<li>
+<p>拷贝构造函数会引起较大的开销，因为要制作 s1 值的拷贝，并把值赋给 s2，这通常需要用 new 操作符分配堆内存，需要调用 strcpy 函数拷贝 s1 内的数据到 s2，这是一个 eager evaluation。然而这时的 s2 并不需要这个值的拷贝，因为 s2 没有被使用。</p>
+</li>
+<li>
+<p>懒惰就是少工作。不应该赋给 s2 一个s1的拷贝，而是让 s2 与 s1 共享一个值。我们只须做一些记录以便知道谁在共享什么，就能够省掉调用 new 和拷贝字符的开销。事实上s1 和 s2 共享一个数据结构，这对于 client 来说是透明的。如果不修改 s2，我们就不用制作它自己值的拷贝，继续保持共享值直到程序退出。</p>
+</li>
+<li>
+<p>区别对待读取和写入</p>
+</li>
+</ul>
+<ol>
+<li>Lazy Fetching：只产生对象的一个外壳，当对象内的某个字段被需要了，程序才从数据库中取回对应的数据</li>
+<li>mutable关键字，允许对 const 对象进行修改, 由编译器支持</li>
+</ol>
+<p><strong>Link</strong></p>
+<ul>
+<li>单例中存在两种模式，懒汉式和饿汉式，其基本思想与次条款基本一致</li>
+</ul>
+<h2 id="18分期摊还预期的计算成本">18.分期摊还预期的计算成本</h2>
+<ul>
+<li>over-eager evaluation：如果你认为一个计算需要频繁进行，你就可以设计一个数据结构高效地处理这些计算需求，这样可以降低每次计算需求时的开销——缓存那些已经被计算出来而以后还有可能需要的值</li>
+</ul>
+<h2 id="19了解临时对象的来源">19.了解临时对象的来源</h2>
+<p>只有两种情况会出现临时变量</p>
+<ol>
+<li>为了使函数成功调用而进行隐式类型转换：</li>
+</ol>
+<ul>
+<li>当传送给函数的对象类型与参数类型不匹配时会产生这种情况</li>
+<li>仅当通过传值式传递对象或传递常量引用参数时，才会发生这些类型转换。当传递一个非常量引用参数对象，不会发生此情况。因为隐式转化会更改非常量引用参数的类型，导致引用发生更改，编译器报错</li>
+</ul>
+<ol start="2">
+<li>函数返回对象时：</li>
+</ol>
+<ul>
+<li>因为返回的对象没有被命名；它只是函数的返回值</li>
+</ul>
+<ol start="3">
+<li>重新设计你的代码，不让发生这种类型转换或通过修改软件而不再需要类型转换进行修正</li>
+</ol>
+<h2 id="20协助完成返回值优化rvo">20.协助完成“返回值优化(RVO)”</h2>
+<p>不要在一个函数里返回一个局部对象的地址，因为它离开函数体后就析构了</p>
+<h2 id="21利用重载技术避免隐式类型转换">21.利用重载技术避免隐式类型转换</h2>
+<h2 id="22考虑以操作符复合形式op取代其独身形式op">22.考虑以操作符复合形式(op=)取代其独身形式(op)</h2>
+<ul>
+<li>operator 的赋值形式（operator+=）比单独形式(operator+)效率更高。</li>
+<li>作为一个库程序设计者，应该两者都提供，做为一个应用程序的开发者，在优先考虑性能时你应该考虑考虑用 operator 赋值形式代替单独形式。</li>
+</ul>
+<h2 id="23考虑使用其它程序库">23.考虑使用其它程序库</h2>
+<h2 id="24了解-virtual-functionsmultiple-inheritancevirtual-base-classesruntime-type-identification-的成本">24.了解 virtual functions、multiple inheritance、virtual base classes、runtime type identification 的成本</h2>
+<ul>
+<li><strong>virtual functions</strong></li>
+</ul>
+<ol>
+<li>类的 vtbl 的大小与类中声明的虚函数的数量成正比。每个类应该只有一个 virtual table</li>
+<li>在每个包含虚函数的类的对象里，你必须为vptr付出代价。</li>
+<li>无法使用内联函数(编译期拓展内联与运行期冲突)</li>
+</ol>
+<ul>
+<li><strong>multiple inheritance</strong></li>
+</ul>
+<ol>
+<li>在单个对象里有多个 vptr（每一个基类对应一个）；除了自己的 vtbl 以外，还得为基类生成特殊的 vtbl</li>
+</ol>
+<ul>
+<li><strong>RTTI</strong> and <strong>RAII</strong></li>
+<li><strong>RTII</strong>——Runtime Type Identification</li>
+</ul>
+<ol>
+<li>RTTI 能让我们在运行时找到对象和类的有关信息，这些信息被存储在类型为 type_info 的对象里，你能通过使用 typeid 操作符访问一个类的 type_info 对象。</li>
+<li>type_info类的复制构造函数和赋值运算符都是私有的，所以不允许用户自已创建type_info的类。唯一要使用type_info类的方法就是使用typeid函数。</li>
+<li>把typeid函数声明为type_info类的友元函数，默认构造函数并不能阻止该类的友元函数创建该类的对象。所以typeid函数如果是友元的话就可以访问type_info类的私有成员，从而可以创建type_info类的对象，从而可以创建返回类型为type_info类的引用。</li>
+</ol>
+<ul>
+<li><strong>RAII</strong>——Resource Acquisition Is Initialization</li>
+</ul>
+<ol>
+<li>资源获取时就进行初始化-&gt;使用一个对象，在其构造时获取资源，在对象生命期控制对资源的访问使之始终保持有效，最后在对象析构的时候释放资源</li>
+</ol>
+<h1 id="五技术techniquesidiomspatterns">五、技术(Techniques,Idioms,Patterns)</h1>
+<h2 id="25将构造函数和非成员函数虚拟化">25.将构造函数和非成员函数虚拟化</h2>
+<ul>
+<li>虚拟构造函数行为与构造函数相似，因为它能够根据输入给它的数据的不同而建立不同类型的对象</li>
+<li>虚拟拷贝构造函数能返回一个指针，指向调用该函数的对象的新拷贝，类的虚拟拷贝构造函数只是调用它们真正的拷贝构造函数</li>
+<li>虚拟化的非成员函数根据参数的不同动态类型展现不同的行为特征</li>
+</ul>
+<h2 id="26限制某个类所能产生的对象数量">26.限制某个类所能产生的对象数量</h2>
+<ul>
+<li>在类中的静态对象总是被构造和释放的，即使不使用该对象；函数中的静态对象只有在第一次执行函数时才会建立对象。</li>
+<li>使用引用计数跟踪对象存在的数量。当构造类时，增加引用计数的值，释放类时，减少引用计数的值</li>
+</ul>
+<h2 id="27要求或禁止在堆中产生对象">27.要求或禁止在堆中产生对象</h2>
+<ul>
+<li><strong>要求</strong>——让析构函数成为private(该类不能被继承)或protected(该类可以被继承)，让构造函数成为public。</li>
+<li><strong>禁止</strong>——声明operator new函数,并把它作为private权限</li>
+</ul>
+<p><strong>Link</strong></p>
+<ul>
+<li><strong>三种继承</strong>(派生类对于父类资源访问权限)</li>
+</ul>
+<ol>
+<li>public继承
+<ul>
+<li>public-&gt;public</li>
+<li>protected-&gt;protected</li>
+<li>private-&gt;无法访问</li>
+</ul>
+</li>
+<li>protected继承
+<ul>
+<li>public-&gt;protected</li>
+<li>protected-&gt;protected</li>
+<li>private-&gt;无法访问</li>
+</ul>
+</li>
+<li>private继承
+<ul>
+<li>public-&gt;private</li>
+<li>protected-&gt;private</li>
+<li>private-&gt;无法访问</li>
+</ul>
+</li>
+</ol>
+<h2 id="28灵巧smart指针">28.灵巧（smart）指针</h2>
+<p>参考share_ptr源码</p>
+<h2 id="29引用计数">29.引用计数</h2>
+<p>参考share_ptr源码</p>
+<h2 id="30代理类">30.代理类</h2>
+<p>参考设计模式中的代理模式——给某一个对象提供一个代理，并由代理对象控制对原对象的引用，是一种对象结构型模式</p>
+<h2 id="31让函数根据一个以上的对象类型来决定怎么虚拟">31.让函数根据一个以上的对象类型来决定怎么虚拟</h2>
+<p>如果某个函数调用根据两个参数而虚化就称为双重分派，根据多个函数而虚化称为多重分派</p>
+<ul>
+<li>虚函数 + RTTI</li>
+</ul>
+<ol>
+<li>使用if-else语句结合RTTI</li>
+<li>如果要加入新的类型，那么继承体系中每一个类的collide函数可能都需要添加处理新型碰撞的代码。</li>
+</ol>
+<ul>
+<li>只使用虚函数</li>
+</ul>
+<ol>
+<li>通过对虚函数collide的重载,将double dispatch以两个single dispatch实现</li>
+<li>一旦有新的class加入，代码就必须修改——含入一个新的虚函数，类定义需要修改</li>
+</ol>
+<ul>
+<li>自行仿真虚函数表格</li>
+</ul>
+<ol>
+<li>自行仿真一个虚函数表格,它保存类名和对应碰撞处理函数指针的&quot;键-值&quot;对，并进行类名到碰撞处理函数的映射，达到double dispatch的目的。</li>
+</ol>
+<h1 id="六杂项讨论miscellany">六、杂项讨论(Miscellany)</h1>
+<h2 id="32在未来时态下发展程序">32.在未来时态下发展程序</h2>
+<h2 id="33将非尾端类设计为抽象类">33.将非尾端类设计为抽象类</h2>
+<h2 id="34如何在同一个程序中结合-c-和-c">34.如何在同一个程序中结合 C++ 和 C</h2>
+<h2 id="35让自己习惯于标准-c-语言">35.让自己习惯于标准 C++ 语言</h2>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Phi </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://philyc.github.io/2021/more-effective-c-%E7%AC%94%E8%AE%B0/>https://philyc.github.io/2021/more-effective-c-%E7%AC%94%E8%AE%B0/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://philyc.github.io/tags/c&#43;&#43;/">
+                    #C&#43;&#43;</a></span>
+            
+            <span class="tag"><a href="https://philyc.github.io/tags/reading-notes/">
+                    #Reading notes</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://philyc.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://philyc.github.io/2021/effective-c-%E7%AC%94%E8%AE%B0/" class="prev" rel="prev" title="《Effective C&#43;&#43;》笔记"><i class="iconfont icon-left"></i>&nbsp;《Effective C&#43;&#43;》笔记</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2021</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://philyc.github.io/">Phi</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

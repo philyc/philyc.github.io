@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithms on Phi&#39;s Blog</title>
+    <link>https://philyc.github.io/tags/algorithms/</link>
+    <description>Recent content in Algorithms on Phi&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 12 Jun 2021 23:44:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://philyc.github.io/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>《算法导论》笔记——第一部分</title>
+      <link>https://philyc.github.io/2021/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86/</link>
+      <pubDate>Sat, 12 Jun 2021 23:44:01 +0800</pubDate>
+      
+      <guid>https://philyc.github.io/2021/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E7%AC%94%E8%AE%B0%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86/</guid>
+      <description>《算法导论》第一部分——基础知识 读书笔记，记录书中基础和重要的知识，附带整理一些相关的知识 第1章 算法在计算中的作用 第2章 算法基础 第3章 函数的</description>
+    </item>
+    
+  </channel>
+</rss>

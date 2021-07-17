@@ -6,10 +6,28 @@
     <description>Recent content in Reading notes on Phi&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 17 Mar 2020 22:29:51 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 02 Jun 2021 10:52:29 +0800</lastBuildDate>
     
 	<atom:link href="https://philyc.github.io/tags/reading-notes/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>《More Effective C&#43;&#43;》笔记</title>
+      <link>https://philyc.github.io/2021/more-effective-c-%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 02 Jun 2021 10:52:29 +0800</pubDate>
+      
+      <guid>https://philyc.github.io/2021/more-effective-c-%E7%AC%94%E8%AE%B0/</guid>
+      <description>《More Effective C++》读书笔记，记录书中基础和重要的知识，附带整理一些相关的知识 一、基础议题(Basics) 1.指针与引用的区别 指针是整数，代</description>
+    </item>
+    
+    <item>
+      <title>《Effective C&#43;&#43;》笔记</title>
+      <link>https://philyc.github.io/2021/effective-c-%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sat, 29 May 2021 15:28:02 +0800</pubDate>
+      
+      <guid>https://philyc.github.io/2021/effective-c-%E7%AC%94%E8%AE%B0/</guid>
+      <description>《Effective C++》读书笔记，记录书中基础和重要的知识，附带整理一些相关的知识 一、习惯C++ 1.视C++为一个语言联邦 2.尽量使用c</description>
+    </item>
     
     <item>
       <title>《CSAPP》笔记——第十二章</title>
